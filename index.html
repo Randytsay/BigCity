@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>遠東巨城｜智慧能源營運總管 Demo</title>
+<style>
+:root{
+  --bg:#07111e;--panel:#0c1a2a;--panel2:#102238;--line:#20364f;
+  --text:#eef5fb;--muted:#8da6bf;--accent:#37c6a7;--blue:#62a9ff;
+  --warn:#f2bd5b;--danger:#f17f7f;--good:#63d49d;--r:17px;
+}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 78% -10%,rgba(79,153,255,.12),transparent 30%),linear-gradient(180deg,#07111e,#091522 55%,#07101b);color:var(--text);font-family:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+button,select{font:inherit}.app{display:grid;grid-template-columns:224px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:23px 15px;border-right:1px solid var(--line);background:rgba(6,15,27,.88);backdrop-filter:blur(18px)}
+.brand{padding:4px 8px 24px}.brand .eyebrow{font-size:10px;letter-spacing:.17em;color:#83edd4;font-weight:800}.brand h1{font-size:19px;margin:8px 0 5px}.brand p{font-size:11px;color:var(--muted);line-height:1.5;margin:0}
+.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:var(--muted);padding:11px 12px;border-radius:11px;text-align:left;cursor:pointer}.nav button:hover,.nav button.active{background:#11243a;color:white}.nav small{float:right;color:#5f7b97}
+.mode{position:absolute;left:15px;right:15px;bottom:17px;border:1px solid rgba(55,198,167,.35);background:rgba(55,198,167,.08);border-radius:13px;padding:12px}.mode strong{font-size:11px;color:#93efd8}.mode p{font-size:10.5px;color:#8fa8c1;line-height:1.5;margin:6px 0 0}
+main{padding:23px 27px 38px;max-width:1720px;width:100%;margin:auto}.top{display:flex;gap:18px;justify-content:space-between;align-items:center;margin-bottom:17px}.top h2{font-size:24px;margin:0 0 4px}.top p{font-size:12px;color:var(--muted);margin:0}.actions{display:flex;align-items:center;gap:9px}select,.pill{background:#0c1a2a;border:1px solid var(--line);border-radius:10px;color:#dce9f6;padding:9px 11px;font-size:11px}.pill.live:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);margin-right:7px;box-shadow:0 0 0 4px rgba(99,212,157,.09)}
+.banner{display:flex;gap:10px;align-items:center;padding:10px 13px;border:1px dashed #2e4c6a;border-radius:13px;background:rgba(36,73,110,.14);color:#9fb7cd;font-size:11px;margin-bottom:14px}.banner b{color:#d8e8f6}
+.card{background:linear-gradient(180deg,rgba(16,34,56,.97),rgba(11,26,43,.97));border:1px solid var(--line);border-radius:var(--r);box-shadow:0 15px 38px rgba(0,0,0,.18)}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:11px;margin-bottom:13px}.kpi{padding:15px}.label{font-size:11px;color:var(--muted)}.value{font-size:27px;font-weight:760;letter-spacing:-.04em;margin:7px 0 3px}.unit{font-size:12px;color:var(--muted);font-weight:500}.delta{font-size:10.5px;margin-top:6px}.good{color:var(--good)}.bad{color:var(--danger)}.warn{color:var(--warn)}
+.sites{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}.site{padding:14px;cursor:pointer;transition:.16s}.site:hover,.site.active{transform:translateY(-2px);border-color:#3d668f}.site-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.site h4{font-size:13px;margin:0}.bms{font-size:9.5px;color:#89a5bf;border:1px solid #29435e;padding:4px 7px;border-radius:999px}.health{display:flex;align-items:center;gap:6px;font-size:10px;color:#9edfc0;margin-top:7px}.health:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--good)}.sm{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.sm div{padding-left:8px;border-left:1px solid #213750}.sm div:first-child{padding-left:0;border-left:0}.sm b{font-size:14px;display:block}.sm span{font-size:9px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,.78fr);gap:13px;margin-bottom:13px}.hero,.side,.panel{padding:17px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.head h3{font-size:15px;margin:0}.head p{font-size:10.5px;color:var(--muted);margin:4px 0 0;line-height:1.5}.badge{font-size:9.5px;border:1px solid #28425e;border-radius:999px;padding:5px 8px;color:#9cb5cb;white-space:nowrap}.badge.w{border-color:rgba(242,189,91,.4);background:rgba(242,189,91,.08);color:#ffd995}.badge.g{border-color:rgba(99,212,157,.35);background:rgba(99,212,157,.07);color:#a1efc5}
+.primary{border:1px solid rgba(242,189,91,.28);background:linear-gradient(135deg,rgba(242,189,91,.10),rgba(40,75,112,.09));padding:15px;border-radius:15px;margin-bottom:10px}.ptop{display:flex;justify-content:space-between;gap:15px}.ptop h4{font-size:18px;line-height:1.35;margin:0 0 6px}.ptop p{font-size:11.5px;color:#aec1d3;line-height:1.6;margin:0;max-width:850px}.confidence{text-align:right;white-space:nowrap;color:#ffd58b;font-size:10px}.confidence b{display:block;font-size:20px;margin-top:2px}
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.box{min-height:109px;padding:10px;border-radius:11px;background:rgba(6,16,29,.58);border:1px solid #263d56}.box .step{font-size:9px;color:#6f8eaa;letter-spacing:.12em}.box strong{display:block;font-size:11px;margin:7px 0}.box p{font-size:10.2px;line-height:1.5;color:#a5bbce;margin:0}.box.rec{border-color:rgba(55,198,167,.42);background:rgba(55,198,167,.065)}.box.rec strong{color:#91edd7}
+.impactline{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.07);font-size:10.5px;color:#8ea6bd}.impactline b{color:#98ead6}.detailbtn{border:1px solid #31516f;background:#132842;color:#cce0f1;padding:7px 10px;border-radius:9px;cursor:pointer;font-size:10px}.detailbtn:hover{border-color:#4c779d;background:#17304d}
+.miniwrap{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini{padding:11px;border-radius:12px;background:#091727;border:1px solid #213850}.mini .mtop{display:flex;justify-content:space-between;gap:8px}.mini strong{font-size:11px}.mini p{font-size:10px;color:var(--muted);line-height:1.48;margin:7px 0 0}
+.priority{display:grid;gap:8px}.task{display:grid;grid-template-columns:27px 1fr auto;gap:9px;padding:10px;border-radius:11px;background:#091727;border:1px solid #213750;align-items:start}.num{width:25px;height:25px;border-radius:8px;background:#152b43;display:grid;place-items:center;font-size:10px;color:#9bc5e8}.task strong{font-size:11px;display:block;margin-bottom:3px}.task p{font-size:9.7px;line-height:1.45;color:var(--muted);margin:0}.impact{font-size:9px;color:#8debd5;white-space:nowrap}
+.bottom{display:grid;grid-template-columns:1.2fr 1fr .9fr;gap:13px}.legend{display:flex;gap:14px;font-size:9px;color:var(--muted)}.dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px}.chart{height:185px;margin-top:6px}.chart svg{width:100%;height:100%}.meter{display:grid;gap:10px;margin-top:8px}.mi{display:grid;grid-template-columns:98px 1fr 48px;gap:8px;align-items:center;font-size:10px}.bar{height:7px;background:#142a42;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#3ebc9f,#61a9ff);border-radius:99px}.mi b{text-align:right}.evidence{display:grid;gap:8px}.ev{padding:10px;background:#091727;border:1px solid #213750;border-radius:11px}.ev b{font-size:11px}.ev span{display:block;margin-top:4px;font-size:9.8px;color:var(--muted);line-height:1.45}.foot{font-size:9.5px;color:#58748f;text-align:right;margin-top:14px}
+.drawer{position:fixed;inset:0;display:none;background:rgba(1,7,13,.66);z-index:20}.drawer.show{display:block}.drawerpanel{position:absolute;right:0;top:0;height:100%;width:min(520px,92vw);background:#0a1727;border-left:1px solid #29435e;padding:24px;overflow:auto}.drawerpanel h3{margin:0 0 5px}.drawerpanel>p{color:var(--muted);font-size:11px;line-height:1.6}.close{position:absolute;right:17px;top:15px;background:#11253b;color:white;border:1px solid #29435e;border-radius:9px;padding:7px 10px;cursor:pointer}.logic{display:grid;gap:9px;margin-top:18px}.logic div{padding:12px;border-radius:12px;background:#0d1e31;border:1px solid #233c56}.logic b{font-size:11px}.logic p{font-size:10px;color:#9db3c7;line-height:1.55;margin:5px 0 0}.future{margin-top:16px;border:1px solid rgba(98,169,255,.35);background:rgba(98,169,255,.07);padding:12px;border-radius:12px}.future b{font-size:11px;color:#a8d2ff}.future p{font-size:10px;color:#91abc2;line-height:1.55;margin:5px 0 0}
+@media(max-width:1180px){.kpis{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.bottom{grid-template-columns:1fr 1fr}.bottom .panel:last-child{grid-column:1/-1}}
+@media(max-width:820px){.app{grid-template-columns:1fr}aside{display:none}main{padding:15px}.top{align-items:flex-start;flex-direction:column}.kpis,.sites{grid-template-columns:1fr 1fr}.chain{grid-template-columns:1fr 1fr}.miniw, .miniwrap,.bottom{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="eyebrow">FUTURE ENERGY OPERATIONS</div><h1>巨城智慧能源總管</h1><p>EMS + Analytics / Future Vision Demo</p></div>
+  <nav class="nav">
+    <button class="active">總管首頁 <small>01</small></button><button>冷源系統 <small>02</small></button><button>水側系統 <small>03</small></button><button>AHU / 末端 <small>04</small></button><button>威秀影城 <small>05</small></button><button>節能績效 <small>06</small></button><button>異常與工單 <small>07</small></button>
+  </nav>
+  <div class="mode"><strong>● Advisory Mode｜建議模式</strong><p>本案呈現分析、診斷與操作建議，不直接下控既有設備。未來可依驗證、權限與業主需求擴充最佳化控制。</p></div>
+</aside>
+<main>
+  <header class="top">
+    <div><h2>智慧能源營運總管</h2><p>把既有 BMS「看得到的數值」，轉成「看得懂的狀況、原因、風險與建議」。</p></div>
+    <div class="actions"><select id="siteSelect"><option value="all">全部場域</option><option value="main">巨城本館</option><option value="creative">創藝大樓</option><option value="cinema">威秀影城</option></select><span class="pill live">資料連線正常</span></div>
+  </header>
+  <div class="banner"><b>DEMO 模擬畫面</b><span>用於展示未來可能的資訊呈現方式；頁面數值為情境模擬，非正式驗收、契約或節能量數據。</span></div>
+
+  <section class="kpis">
+    <div class="card kpi"><div class="label">整體冷源效率</div><div class="value"><span id="eff">0.84</span> <span class="unit">kW/RT</span></div><div id="effNote" class="delta bad">較目標 0.76 高 10.5%</div></div>
+    <div class="card kpi"><div class="label">即時冷房負載</div><div class="value"><span id="rt">4,126</span> <span class="unit">RT</span></div><div id="rtNote" class="delta">預估 60 分鐘後 +6%</div></div>
+    <div class="card kpi"><div class="label">空調即時用電</div><div class="value"><span id="kw">3,482</span> <span class="unit">kW</span></div><div id="kwNote" class="delta warn">存在效率改善機會</div></div>
+    <div class="card kpi"><div class="label">系統 ΔT</div><div class="value"><span id="dt">2.8</span> <span class="unit">°C</span></div><div id="dtNote" class="delta bad">低於建議運轉區間</div></div>
+    <div class="card kpi"><div class="label">今日待關注事項</div><div class="value"><span id="issues">6</span> <span class="unit">項</span></div><div id="issueNote" class="delta warn">其中 2 項建議今日處理</div></div>
+  </section>
+
+  <section class="sites">
+    <div class="card site" data-site="main"><div class="site-top"><h4>巨城本館</h4><span class="bms">BMS｜iFIX</span></div><div class="health">系統連線正常・2 項效率洞察</div><div class="sm"><div><b>0.82</b><span>kW/RT</span></div><div><b>3,420</b><span>RT</span></div><div><b>2.7°C</b><span>ΔT</span></div></div></div>
+    <div class="card site" data-site="creative"><div class="site-top"><h4>創藝大樓</h4><span class="bms">BMS｜WebCTRL</span></div><div class="health">系統連線正常・2 項設備洞察</div><div class="sm"><div><b>0.91</b><span>kW/RT</span></div><div><b>486</b><span>RT</span></div><div><b>3.2°C</b><span>ΔT</span></div></div></div>
+    <div class="card site" data-site="cinema"><div class="site-top"><h4>威秀影城</h4><span class="bms">BMS｜WebCTRL</span></div><div class="health">同一套 WebCTRL・晚場負載上升</div><div class="sm"><div><b>0.88</b><span>kW/RT</span></div><div><b>220</b><span>RT</span></div><div><b>3.6°C</b><span>ΔT</span></div></div></div>
+  </section>
+
+  <section class="layout">
+    <div class="card hero">
+      <div class="head"><div><h3>今日首要洞察</h3><p>不是只顯示告警；平台把原本分散的數值整理成「現象 → 證據 → 可能原因 → 建議」。</p></div><span id="statusBadge" class="badge w">效率偏低｜需關注</span></div>
+      <div class="primary">
+        <div class="ptop"><div><h4 id="insightTitle">整體冷源效率偏低，主要疑似由「低 ΔT ＋ 二次側過度供水」造成</h4><p id="insightDesc">目前冷量沒有明顯上升，但二次泵功率與主幹管流量持續偏高；多數末端閥位仍處於中低開度，代表系統可能正在用較大的水量輸送同樣的冷量。</p></div><div class="confidence">分析可信度<b id="confidence">87%</b></div></div>
+        <div class="chain">
+          <div class="box"><div class="step">01 / 現象</div><strong id="phenomenon">效率變差</strong><p id="phenomenonText">Plant kW/RT 連續 75 分鐘高於同負載歷史正常區間。</p></div>
+          <div class="box"><div class="step">02 / 證據</div><strong id="evidenceTitle">流量偏高、ΔT 偏低</strong><p id="evidenceText">ΔT 2.8°C；末端平均閥位 39%；泵浦仍維持 46 Hz。</p></div>
+          <div class="box"><div class="step">03 / 可能原因</div><strong id="causeTitle">過度供水 / 水力失衡</strong><p id="causeText">優先排查壓差設定偏高、旁通、閥件洩漏及局部水力失衡。</p></div>
+          <div class="box rec"><div class="step">04 / 建議</div><strong id="recommendTitle">先觀察，再調整</strong><p id="recommendText">建議檢查最不利端閥位與 ΔP；若舒適度穩定，可分階段下修壓差設定。</p></div>
+        </div>
+        <div class="impactline"><span id="impactText">若確認屬過度供水，預估可降低二次側無效輸送能耗；實際效益需依現場驗證。</span><button class="detailbtn" id="detailBtn">查看分析依據 →</button></div>
+      </div>
+      <div class="miniwrap">
+        <div class="mini"><div class="mtop"><strong>AHU 高頻 / 低閥位</strong><span class="badge">3 台</span></div><p>風機維持高頻，但閥位長時間偏低。建議比對區域溫度、送回風溫與歷史同時段運轉。</p></div>
+        <div class="mini"><div class="mtop"><strong>威秀晚場負載上升</strong><span class="badge">18:00–20:00</span></div><p>建議觀察晚場前 30–60 分鐘冷房需求；未來可結合場次、人流與外氣作前饋預測。</p></div>
+        <div class="mini"><div class="mtop"><strong>感測器一致性檢查</strong><span class="badge g">建議驗證</span></div><p>一組供回水溫差與相鄰測點趨勢不一致，建議先確認校正與安裝位置，避免錯誤判讀。</p></div>
+      </div>
+    </div>
+
+    <aside class="card side" style="position:static;height:auto;background:linear-gradient(180deg,rgba(16,34,56,.97),rgba(11,26,43,.97));padding:17px;border-right:1px solid var(--line)">
+      <div class="head"><div><h3>總管今日建議</h3><p>依影響程度與可執行性排序，協助人員決定先看哪裡。</p></div><span class="badge">Advisory</span></div>
+      <div class="priority">
+        <div class="task"><div class="num">01</div><div><strong>確認二次側最不利端閥位與壓差</strong><p>先確認現有 DP 是否仍有下修空間，不直接變更設定。</p></div><div class="impact">高影響</div></div>
+        <div class="task"><div class="num">02</div><div><strong>檢查 3 台高頻 / 低閥位 AHU</strong><p>排除感測、濾網、盤管、閥件與過度送風問題。</p></div><div class="impact">中影響</div></div>
+        <div class="task"><div class="num">03</div><div><strong>追蹤低 ΔT 是否集中於特定分區</strong><p>用區域閥位、流量與溫差關聯縮小問題範圍。</p></div><div class="impact">中影響</div></div>
+        <div class="task"><div class="num">04</div><div><strong>觀察威秀晚場前負載變化</strong><p>建立場次、人流與冷房需求的對照資料，供未來預測模型使用。</p></div><div class="impact">未來價值</div></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="bottom">
+    <div class="card panel"><div class="head"><div><h3>24 小時效率趨勢</h3><p>把「現在偏高」放回歷史與目標區間看，避免只看單點數值。</p></div><div class="legend"><span><i class="dot" style="background:#62a9ff"></i>實際</span><span><i class="dot" style="background:#37c6a7"></i>參考區間</span></div></div><div class="chart"><svg viewBox="0 0 700 190" preserveAspectRatio="none"><g stroke="#1d334b" stroke-width="1"><line x1="0" y1="30" x2="700" y2="30"/><line x1="0" y1="75" x2="700" y2="75"/><line x1="0" y1="120" x2="700" y2="120"/><line x1="0" y1="165" x2="700" y2="165"/></g><path d="M0,124 C65,122 92,114 130,112 S202,111 230,99 S298,92 330,86 S390,76 420,79 S485,54 525,65 S590,42 625,52 S676,46 700,40" fill="none" stroke="#62a9ff" stroke-width="3"/><path d="M0,135 C80,132 135,130 195,126 S300,118 370,113 S460,105 535,104 S625,96 700,95" fill="none" stroke="#37c6a7" stroke-width="2" stroke-dasharray="7 6"/><circle cx="700" cy="40" r="4" fill="#62a9ff"/></svg></div></div>
+    <div class="card panel"><div class="head"><div><h3>可能原因貢獻度</h3><p>不是宣稱 AI 已確定根因，而是把最值得優先驗證的原因排序。</p></div><span class="badge">Root Cause Ranking</span></div><div class="meter"><div class="mi"><span>過度供水</span><div class="bar"><i style="width:72%"></i></div><b>72%</b></div><div class="mi"><span>水力失衡</span><div class="bar"><i style="width:54%"></i></div><b>54%</b></div><div class="mi"><span>閥件/旁通</span><div class="bar"><i style="width:38%"></i></div><b>38%</b></div><div class="mi"><span>感測偏移</span><div class="bar"><i style="width:19%"></i></div><b>19%</b></div></div></div>
+    <div class="card panel"><div class="head"><div><h3>判讀依據</h3><p>讓技術人員知道系統是依什麼資料提出建議。</p></div></div><div class="evidence"><div class="ev"><b>二次泵平均頻率 46 Hz</b><span>冷量未同步增加，與同負載歷史日相比偏高。</span></div><div class="ev"><b>末端閥位中位數 39%</b><span>多數末端並未要求高流量，值得檢查壓差設定。</span></div><div class="ev"><b>冰水 ΔT 2.8°C</b><span>低於目前設定的觀察區間，需進一步拆分到各區。</span></div></div></div>
+  </section>
+  <div class="foot">Big City Smart Energy Operations Demo V0.1 · Simulation Data Only</div>
+</main>
+</div>
+
+<div class="drawer" id="drawer"><div class="drawerpanel"><button class="close" id="close">關閉</button><h3>這個洞察是怎麼來的？</h3><p>這一頁的目的，是把原本散落在 BMS 裡、需要資深人員自行交叉判讀的點位，整理成一條可追溯的判斷鏈。以下為 Demo 邏輯。</p><div class="logic"><div><b>1. 先判斷「效率是否真的異常」</b><p>不是只用固定門檻，而是比較目前負載、外氣條件、歷史同負載區間與系統效率，避免高負載時正常耗電被誤判成異常。</p></div><div><b>2. 再找「哪個子系統造成額外耗電」</b><p>同步看主機、二次泵、冷卻水、AHU 與末端條件，確認耗電增加是否伴隨有效冷量增加。</p></div><div><b>3. 用關聯資料縮小可能原因</b><p>例如 ΔT 偏低 + 流量偏高 + 多數閥位偏小 + 泵浦頻率偏高，會優先指向過度供水、壓差設定或水力失衡，而不是只顯示「低 ΔT 告警」。</p></div><div><b>4. 最後才提出可驗證的建議</b><p>本案先提供觀察與操作建議，例如「確認最不利端閥位」「比對壓差」「檢查特定 AHU」，由現場人員決定是否執行。</p></div></div><div class="future"><b>Future Vision｜未來控制擴充</b><p>待資料品質、控制邊界、安全連鎖與節能成效完成驗證後，未來可再擴充成 Operator Approval 或 Supervisory Optimization；但此功能不屬於目前本案 AI 自動控制承諾。</p></div></div></div>
+<script>
+const DATA={
+ all:{eff:'0.84',effNote:'較目標 0.76 高 10.5%',rt:'4,126',rtNote:'預估 60 分鐘後 +6%',kw:'3,482',kwNote:'存在效率改善機會',dt:'2.8',dtNote:'低於建議運轉區間',issues:'6',issueNote:'其中 2 項建議今日處理',status:'效率偏低｜需關注',title:'整體冷源效率偏低，主要疑似由「低 ΔT ＋ 二次側過度供水」造成',desc:'目前冷量沒有明顯上升，但二次泵功率與主幹管流量持續偏高；多數末端閥位仍處於中低開度，代表系統可能正在用較大的水量輸送同樣的冷量。',conf:'87%',p:'效率變差',pt:'Plant kW/RT 連續 75 分鐘高於同負載歷史正常區間。',e:'流量偏高、ΔT 偏低',et:'ΔT 2.8°C；末端平均閥位 39%；泵浦仍維持 46 Hz。',c:'過度供水 / 水力失衡',ct:'優先排查壓差設定偏高、旁通、閥件洩漏及局部水力失衡。',r:'先觀察，再調整',rtxt:'建議檢查最不利端閥位與 ΔP；若舒適度穩定，可分階段下修壓差設定。',impact:'若確認屬過度供水，預估可降低二次側無效輸送能耗；實際效益需依現場驗證。'},
+ main:{eff:'0.82',effNote:'效率仍有優化空間',rt:'3,420',rtNote:'負載目前穩定',kw:'2,804',kwNote:'二次側耗電偏高',dt:'2.7',dtNote:'低 ΔT 需持續拆區診斷',issues:'3',issueNote:'1 項建議優先確認',status:'水側效率｜需關注',title:'巨城本館低 ΔT 持續，水側輸送效率值得優先檢查',desc:'目前本館冷量維持穩定，但二次泵頻率偏高，末端閥位需求並未同步提高。與歷史同負載時段相比，存在過度供水的可能。',conf:'90%',p:'低 ΔT 持續',pt:'本館 ΔT 2.7°C，且已持續超過 60 分鐘。',e:'泵頻偏高、閥位偏低',et:'二次泵約 46 Hz；多數末端閥位仍在中低開度。',c:'DP 設定 / 水力問題',ct:'可能與壓差設定偏高、局部旁通或水力失衡有關。',r:'優先確認最不利端',rtxt:'先看最不利端閥位與區域壓差；確認供冷餘裕後再評估設定調整。',impact:'此建議不直接改變泵浦設定；目的是先用現有資料縮小現場查核範圍。'},
+ creative:{eff:'0.91',effNote:'高於近期正常區間',rt:'486',rtNote:'目前為部分負載',kw:'442',kwNote:'主機效率需比對負載',dt:'3.2',dtNote:'較本館穩定',issues:'2',issueNote:'建議確認主機效率與流量',status:'主機效率｜需分析',title:'創藝大樓部分負載下主機效率偏高，建議拆分單機效率來源',desc:'整體 kW/RT 偏高，但目前僅看系統平均無法確認是主機本體、流量分配或冷卻水條件造成。總管會把問題拆成可驗證項目，而不是只顯示一個效率值。',conf:'82%',p:'部分負載效率偏低',pt:'目前負載約 486 RT，但系統效率高於近期相似負載區間。',e:'單機差異需拆解',et:'需比對各主機 kW、RT、CHWS/CHWR 與冷卻水條件。',c:'主機排序 / 水量條件',ct:'可能來自主機運轉組合、低負載效率或水側條件。',r:'先建立單機效率比較',rtxt:'優先確認各主機獨立流量與電力資料，再建立公平的同工況效率排名。',impact:'對管理者的幫助，是知道「效率不好」後下一步該取得什麼資料，而不是立即猜故障。'},
+ cinema:{eff:'0.88',effNote:'晚場前負載正在上升',rt:'220',rtNote:'60 分鐘後預估 +24%',kw:'194',kwNote:'目前仍屬正常區間',dt:'3.6',dtNote:'目前供冷條件正常',issues:'2',issueNote:'以營運負載觀察為主',status:'負載預測｜建議觀察',title:'威秀晚場即將進入人流高峰，建議提前觀察冷房負載與舒適度變化',desc:'威秀與創藝使用同一套 WebCTRL BMS。未來總管可把既有空調數值與影城營運節奏放在一起看，讓操作人員不必等室溫升高後才知道負載正在變化。',conf:'79%',p:'未來負載上升',pt:'依 Demo 場次情境，18:00–20:00 預估冷房需求明顯增加。',e:'營運節奏可前饋',et:'既有 WebCTRL 溫度與設備狀態可再結合場次、人流及外氣資料。',c:'非設備故障',ct:'目前比較像營運造成的正常負載變化，而非設備異常。',r:'建立晚場觀察窗口',rtxt:'先追蹤場次前後 30–60 分鐘的 RT、室溫、AHU 與主機負載，建立預測基礎。',impact:'本案先提供洞察與建議；未來才可評估預冷、排程或負載預測控制。'}
+};
+const ids=['eff','effNote','rt','rtNote','kw','kwNote','dt','dtNote','issues','issueNote'];
+function apply(site){const d=DATA[site];ids.forEach(id=>document.getElementById(id).textContent=d[id]);document.getElementById('statusBadge').textContent=d.status;document.getElementById('insightTitle').textContent=d.title;document.getElementById('insightDesc').textContent=d.desc;document.getElementById('confidence').textContent=d.conf;document.getElementById('phenomenon').textContent=d.p;document.getElementById('phenomenonText').textContent=d.pt;document.getElementById('evidenceTitle').textContent=d.e;document.getElementById('evidenceText').textContent=d.et;document.getElementById('causeTitle').textContent=d.c;document.getElementById('causeText').textContent=d.ct;document.getElementById('recommendTitle').textContent=d.r;document.getElementById('recommendText').textContent=d.rtxt;document.getElementById('impactText').textContent=d.impact;document.querySelectorAll('.site').forEach(x=>x.classList.toggle('active',x.dataset.site===site));document.getElementById('siteSelect').value=site;}
+document.getElementById('siteSelect').addEventListener('change',e=>apply(e.target.value));document.querySelectorAll('.site').forEach(el=>el.addEventListener('click',()=>apply(el.dataset.site)));document.getElementById('detailBtn').onclick=()=>document.getElementById('drawer').classList.add('show');document.getElementById('close').onclick=()=>document.getElementById('drawer').classList.remove('show');document.getElementById('drawer').addEventListener('click',e=>{if(e.target.id==='drawer')e.currentTarget.classList.remove('show')});
+</script>
+</body>
+</html>
