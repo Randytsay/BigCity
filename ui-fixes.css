@@ -1,0 +1,6 @@
+/* UI corrections requested from annotated homepage review */
+.side-brand{display:none!important}
+.sidebar .nav-list{padding-top:14px}
+@media (min-width:701px){
+  .sidebar{padding-top:0}
+}
