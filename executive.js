@@ -1,42 +1,115 @@
+function execKpi({icon,title,status,value,unit='',meta='',detail='',progress=null,iconClass='',gauge=false,spark=false}){
+  return `<section class="exec-kpi">
+    <div class="exec-kpi-head"><div class="exec-kpi-icon ${iconClass}">${icon}</div><div class="exec-kpi-title">${title}</div></div>
+    <span class="exec-kpi-status">● ${status}</span>
+    <div class="exec-kpi-value">${value}${unit?` <small>${unit}</small>`:''}</div>
+    ${meta?`<div class="exec-kpi-meta">${meta}</div>`:''}
+    ${progress!==null?`<div class="exec-progress"><i style="width:${progress}%">${progress}%</i></div>`:''}
+    ${gauge?`<div class="exec-gauge"></div><div class="exec-gauge-labels"><span><b>0.82</b>現況</span><span><b>0.85</b>目標</span><span><b>0.93</b>基準</span></div>`:''}
+    ${detail?`<div class="exec-kpi-good">${detail}</div>`:''}
+    ${spark?`<div class="exec-kpi-spark"><i style="height:20%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:55%"></i><i style="height:68%"></i><i style="height:82%"></i><i style="height:100%"></i></div>`:''}
+  </section>`;
+}
+function execSite(name,bms,img,value,target,status,statusCls,note){
+  return `<article class="exec-site">
+    <div class="exec-site-photo ${siteImages[img]}"></div>
+    <div><h3>${name} <small>(${bms})</small></h3><div class="exec-site-value">${value} <small>kW/RT</small></div><div class="exec-site-target">目標 ≤ ${target}</div><span class="exec-status ${statusCls}"><i></i>${status}</span><div class="exec-site-note">${note}</div></div>
+  </article>`;
+}
+function execListRows(rows,benefit=false){return `<div class="exec-list">${rows.map((r,i)=>`<div class="exec-list-row"><span class="exec-rank">${i+1}</span><div><b>${r[0]}</b>${r[1]?`<small class="${benefit?'exec-benefit':''}">${r[1]}</small>`:''}</div></div>`).join('')}</div>`;}
 function renderExecutive(){
-  return hero('Executive Energy Brief','能源創造價值・數據驅動決策・邁向更永續、更具競爭力的商業營運。')+
-  `<div class="grid-4" style="margin-bottom:9px">
-    ${kpi('◒','年累計空調節電量','1,280,500','kWh','▲ 12%　較去年同期','good','green')}
-    ${kpi('◉','節省電費','NT$ 3,456,000','','▲ 15%　較去年同期','good','green')}
-    ${kpi('CO₂','減碳量','635','公噸 CO₂e','▲ 12%','good','green')}
-    ${kpi('▥','AI 預測全年節電','1,680,000','kWh','預測達成率 92%','good')}
-  </div>
-  <div class="grid-3">
-    ${execScore('巨城本館','iFIX','main',88,'A','表現優異','能源使用效率優異，持續優化可創造更多節能效益。')}
-    ${execScore('創藝大樓','WebCTRL','creative',82,'A-','持續精進','整體表現良好，仍有水側與時程優化空間。')}
-    ${execScore('威秀影城','WebCTRL','cinema',76,'B+','重點關注','營運負載型態特殊，建議以場次資料強化預測。')}
-  </div>
-  <div class="grid-3">
-    <section class="card"><div class="card-head"><div class="card-title"><span class="spark">✦</span>AI Executive Summary</div></div><div class="mini-list">
-      <div class="mini-row"><span class="rank-dot good">1</span><div><b>本月整體能源績效改善</b><small>三場域空調耗能較去年同期下降 8.7%，本館貢獻最大。</small></div></div>
-      <div class="mini-row"><span class="rank-dot">2</span><div><b>最大節能機會仍在水側</b><small>AI 估計可改善機會主要來自二次泵與低 ΔT。</small></div></div>
-      <div class="mini-row"><span class="rank-dot">3</span><div><b>本週無重大舒適度風險</b><small>各場域環境條件維持可接受範圍。</small></div></div>
-    </div></section>
-    <section class="card"><div class="card-head"><div class="card-title"><span class="spark">◉</span>投資與回報成效</div></div><div class="roi-grid"><div class="roi-item"><b>NT$12.8M</b><span>專案投資</span></div><div class="roi-item"><b>NT$8.96M</b><span>累積節省</span></div><div class="roi-item"><b>1.8 年</b><span>預估回收期</span></div></div><div class="progress"><i style="width:70%"></i></div><div class="card-sub" style="margin-top:8px">回收進度 70%｜投資效益優於原估 2.5 年</div></section>
-    ${card('<span class="spark">▥</span>能源使用趨勢與 AI Forecast',`<div class="chart-box small">${svgLine([{name:'2025實際',data:[.2,.32,.47,.63,.79,.96,.99,.98,.96]},{name:'Baseline',data:[.25,.38,.55,.72,.91,1.1,1.18,1.27,1.38],color:'#9eb3c7'},{name:'AI Forecast',data:[.2,.32,.47,.63,.79,.96,1.12,1.3,1.48,1.62,1.76,1.91],color:'#18b987',dash:true}],['1','2','3','4','5','6','7','8','9','10','11','12'],{min:0,max:2,decimals:1})}</div>`)}
-  </div>
-  <div class="grid-3">
-    ${execList('Top 3 節能機會',[['水側差壓最佳化','預估 +210 MWh/yr','高優先','good'],['AHU 運轉時程最佳化','預估 +92 MWh/yr','中優先','blue'],['冷卻水塔策略最佳化','預估 +60 MWh/yr','中優先','blue']])}
-    ${execList('Top 3 風險與關注',[['CH-01 效率衰退趨勢','建議排入停機檢查','高風險','bad'],['夏季尖峰需量風險','7–8月負載上升','中風險','warn'],['威秀營運負載壓力','暑期場次密度增加','低風險','blue']])}
-    ${execList('主管待決策事項',[['核准水側最佳化試運轉','預計 4 週｜先人工調整','待核准','warn'],['排入 CH-01 停機檢查','非營運時段執行','待決策','blue'],['評估威秀場次資料 PoC','3 個月資料驗證','待討論','warn']])}
+  return `<div class="exec-snapshot">
+    <section class="exec-hero">
+      <h1>Executive Snapshot <span>2026</span></h1>
+      <p>管理層總覽 — 一頁掌握整體營運、節能績效與關鍵決策</p>
+      <div class="exec-hero-logo" aria-hidden="true"></div>
+      <div class="exec-hero-tagline">PEOPLE<br>SHOPPING<br>A BRIGHTER<br>TOMORROW</div>
+    </section>
+
+    <div class="exec-summary-strip"><span class="ico">▥</span><span>整體系統穩定，2026 年累計績效優於目標，巨城本館水側仍有最佳化空間。</span></div>
+
+    <div class="exec-kpi-grid">
+      ${execKpi({icon:'ϟ',title:'今日空調用電',status:'正常',value:'3,542',unit:'kW',meta:'AI 預期　<b>3,820 kW</b>',detail:'▼ 優於預期 7.3%',spark:true})}
+      ${execKpi({icon:'🍃',iconClass:'green',title:'2026 累計節電',status:'進度超前',value:'1.28',unit:'GWh',meta:'年度目標　<b>1.75 GWh</b><br>達成率　<b class="good">73%</b>',progress:73})}
+      ${execKpi({icon:'◉',title:'2026 累計節費',status:'全年預估達標',value:'NT$ 6.3 M',meta:'年度目標　<b>NT$ 8.2 M</b><br>達成率　<b class="good">77%</b>',progress:77})}
+      ${execKpi({icon:'❄',title:'整體冷源效率',status:'達標',value:'0.82',unit:'kW/RT',meta:'目標　<b>≤ 0.85</b><br>Baseline　<b>0.93</b>',detail:'▼ 達標｜優於基準 11.8%',gauge:true})}
+    </div>
+
+    <div class="exec-mid-grid">
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title"><span class="ico">◎</span>三大場域即時狀態</div><span class="exec-more">查看全部場域 ›</span></div>
+        <div class="exec-sites">
+          ${execSite('巨城本館','iFIX','main','0.86','0.83','未達標 3.6%','warn','水側效率仍有提升空間。')}
+          ${execSite('創藝大樓','WebCTRL','creative','0.84','0.87','達標','good','系統運轉穩定。')}
+          ${execSite('威秀影城','WebCTRL','cinema','0.86','0.90','達標','good','運轉狀況良好。')}
+        </div>
+      </section>
+
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title"><span class="ico">▣</span>2026 累計績效（截至 12/31）</div><span class="exec-more">2026 ›</span></div>
+        <div class="exec-ytd">
+          <div class="exec-ytd-item"><span>節電</span><b>1.28</b><span>GWh</span><small>▲ 18% 較去年同期</small></div>
+          <div class="exec-ytd-item"><span>節費</span><b>NT$ 6.3 M</b><small>▲ 22% 較去年同期</small></div>
+          <div class="exec-ytd-item"><span>減碳</span><b>608</b><span>tCO₂e</span><small>▲ 20% 較去年同期</small></div>
+          <div class="exec-ytd-item"><span>年度目標達成率</span><div class="exec-ytd-ring"><b>73%</b></div><span style="text-align:center">目標 1.75 GWh</span></div>
+        </div>
+        <div class="exec-ai-forecast"><span class="ico">▥</span><div><b>AI 預測全年績效將超越目標 9%</b><p>依目前趨勢推估，2026 年節電量可達 1.91 GWh，優於年度目標 9%。</p></div></div>
+      </section>
+    </div>
+
+    <div class="exec-bottom-grid">
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title"><span class="ico">✦</span>AI Executive Summary</div><span class="exec-more">更多 ›</span></div>
+        ${execListRows([
+          ['整體系統運轉穩定，2026 年累計節電 1.28 GWh，達成率 73%，AI 預測全年將超越目標 9%。',''],
+          ['巨城本館水側效率仍有最佳化空間，建議優先推動 ΔT 提升與泵浦運轉優化。',''],
+          ['建議啟動 AI 優化第二階段，擴大 AHU 覆蓋並導入低 ΔT 改善計畫。','']
+        ])}
+      </section>
+
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title"><span class="ico" style="color:var(--green)">🍃</span>Top Opportunities</div></div>
+        ${execListRows([
+          ['巨城系統水側效率優化','預估年效益 NT$ 2.1 M'],
+          ['擴大 AHU AI 控制覆蓋','預估年效益 NT$ 1.8 M'],
+          ['低 ΔT 改善計畫','預估年效益 NT$ 1.2 M']
+        ],true)}
+      </section>
+
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title exec-risk-title"><span class="ico" style="color:var(--amber)">⚠</span>Top Risks</div></div>
+        ${execListRows([
+          ['夏季尖峰負載高於預期','可能影響節電目標達成'],
+          ['設備老化導致效率下降','冰水主機、泵浦、AHU'],
+          ['外部氣候異常（高溫熱浪）','增加空調負載與營運風險']
+        ])}
+      </section>
+
+      <section class="exec-card">
+        <div class="exec-card-head"><div class="exec-card-title"><span class="ico">▥</span>專案投資與 ROI</div><span class="exec-more">更多 ›</span></div>
+        <div class="exec-roi-grid">
+          <div class="exec-roi-item"><span>專案投資</span><b>NT$ 8.5 M</b></div>
+          <div class="exec-roi-item"><span>累計回收</span><b>NT$ 4.2 M</b></div>
+          <div class="exec-roi-item"><span>預估回收期</span><b>4.8 年</b></div>
+          <div class="exec-roi-item"><span>AI 額外潛力</span><b>NT$ 1.7 M/年</b></div>
+        </div>
+        <div class="exec-roi-progress"><i></i></div><div class="exec-roi-caption">回收進度 49%</div>
+        <div class="exec-decision-card"><div class="exec-card-head" style="margin-bottom:6px"><div class="exec-card-title"><span class="ico">▤</span>待決策事項</div><span class="exec-more">更多 ›</span></div><div class="exec-decisions">
+          <div class="exec-decision"><span class="n">1</span><div><b>是否啟動 AI 優化第二階段？</b><small>擴大應用至更多場域與系統</small></div></div>
+          <div class="exec-decision"><span class="n">2</span><div><b>是否擴大 AHU AI 控制覆蓋？</b><small>納入 B2–3F 及影城區 AHU</small></div></div>
+          <div class="exec-decision"><span class="n">3</span><div><b>是否啟動低 ΔT 改善計畫？</b><small>提升水側效率，預估年效益 NT$ 1.2M</small></div></div>
+        </div></div>
+      </section>
+    </div>
+    <div class="exec-demo-note">Demo Data｜本頁數值為展示用途，正式系統應依現場 BMS / EMS、財務資料及 M&amp;V 結果呈現。</div>
   </div>`;
-}
-function execScore(name,bms,img,score,grade,tag,desc){
-  return `<section class="card"><div class="scorecard"><div class="site-photo ${siteImages[img]}"></div><div class="score-meta"><h3>${name} <small>(${bms})</small></h3><div style="display:flex;align-items:center;gap:12px;margin-top:8px"><div class="score-ring" style="background:conic-gradient(var(--teal) 0 ${score}%,var(--surface3) ${score}%)"><b>${score}</b></div><div><div class="grade">${grade}</div>${pill(tag,grade==='B+'?'warn':'good')}</div></div><p>${desc}</p></div></div></section>`;
-}
-function execList(title,rows){
-  return `<section class="card"><div class="card-head"><div class="card-title">${title}</div><span class="more">更多 ›</span></div><div class="mini-list">${rows.map((r,i)=>`<div class="mini-row"><span class="rank-dot">${i+1}</span><div><b>${r[0]}</b><small>${r[1]}</small></div>${pill(r[2],r[3])}</div>`).join('')}</div></section>`;
 }
 
 const renderers={home:renderHome,insights:renderInsights,performance:renderPerformance,plant:renderPlant,executive:renderExecutive};
 function render(){
   document.body.classList.toggle('theme-dark',state.theme==='dark');
   document.body.classList.toggle('theme-light',state.theme!=='dark');
+  document.body.classList.toggle('exec-mode',state.page==='executive');
   $('#pageRoot').innerHTML=renderers[state.page]();
   $$('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));
   bindPage();
