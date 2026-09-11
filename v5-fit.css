@@ -1,0 +1,131 @@
+/* V5 layout fit pass — prevent any cockpit visual from exceeding its card */
+
+/* hard containment */
+body.product-plant .v4-cockpit,
+body.product-plant .v4-cockpit *,
+body.product-plant .v4-cockpit *::before,
+body.product-plant .v4-cockpit *::after{box-sizing:border-box}
+body.product-plant .v4-cockpit{width:100%;max-width:100%;min-width:0;overflow-x:clip}
+body.product-plant .v4-top-grid,
+body.product-plant .v4-mid-grid,
+body.product-plant .v4-card,
+body.product-plant .v4-panel-head,
+body.product-plant .v4-eff-body,
+body.product-plant .v4-chiller-row,
+body.product-plant .v4-flow-row{min-width:0;max-width:100%}
+body.product-plant .v4-card{overflow:hidden}
+body.product-plant .v4-card svg{max-width:100%;display:block}
+
+/* page grids: let tracks shrink instead of pushing outside */
+body.product-plant .v4-top-grid{grid-template-columns:minmax(0,.92fr) minmax(0,1.58fr)!important}
+body.product-plant .v4-mid-grid{grid-template-columns:minmax(0,1.38fr) minmax(0,1fr)!important}
+body.product-plant .v4-top-grid>* ,body.product-plant .v4-mid-grid>*{min-width:0}
+
+/* efficiency panel: keep gauge and metric stack inside the card */
+body.product-plant .v4-eff-body{
+  grid-template-columns:minmax(0,1fr) clamp(142px,31%,176px)!important;
+  gap:clamp(10px,1.1vw,16px)!important;
+  align-items:center;
+}
+body.product-plant .v4-gauge{
+  width:clamp(220px,22vw,300px)!important;
+  max-width:100%!important;
+  justify-self:center;
+}
+body.product-plant .v4-gauge-center{inset:clamp(40px,4vw,50px)!important}
+body.product-plant .v4-gauge-center b{font-size:clamp(58px,4.6vw,72px)!important}
+body.product-plant .v4-gauge-center em{font-size:clamp(17px,1.55vw,22px)!important}
+body.product-plant .v4-gauge-center span{font-size:clamp(12px,1vw,15px)!important}
+body.product-plant .v4-metrics{min-width:0;width:100%}
+body.product-plant .v4-metrics>div{
+  min-width:0!important;width:100%!important;
+  grid-template-columns:34px minmax(0,1fr)!important;
+  column-gap:8px!important;
+  padding:8px 9px!important;
+  overflow:hidden;
+}
+body.product-plant .v4-metric-icon{width:32px!important;height:32px!important}
+body.product-plant .v4-metrics span:not(.v4-metric-icon){font-size:clamp(10px,.78vw,12px)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.product-plant .v4-metrics b{font-size:clamp(20px,1.55vw,25px)!important;white-space:nowrap;letter-spacing:-.03em}
+
+/* chiller cards: six cards can shrink safely without SVG escaping */
+body.product-plant .v4-chiller-row{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(6px,.65vw,10px)!important;width:100%}
+body.product-plant .v4-chiller-card{min-width:0!important;width:100%!important;padding:12px clamp(5px,.55vw,9px) 12px!important}
+body.product-plant .v4-chiller-svg{
+  width:min(100%,176px)!important;
+  height:auto!important;
+  aspect-ratio:2/1!important;
+  max-height:112px!important;
+  object-fit:contain;
+  flex:0 0 auto;
+}
+body.product-plant .v4-chiller-card h3{font-size:clamp(16px,1.25vw,20px)!important;white-space:nowrap}
+body.product-plant .v4-status{font-size:clamp(11px,.92vw,14px)!important;white-space:nowrap}
+body.product-plant .v4-chiller-card strong{font-size:clamp(18px,1.4vw,22px)!important}
+body.product-plant .v4-chiller-card small{font-size:clamp(10px,.84vw,13px)!important;white-space:nowrap}
+body.product-plant .v4-ai-badge{max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:0 1 auto}
+
+/* flow diagram: proportional flex items, no horizontal spill */
+body.product-plant .v4-flow-row{
+  width:100%!important;
+  padding:24px 4px 10px!important;
+  gap:clamp(4px,.6vw,9px)!important;
+  overflow:hidden!important;
+  justify-content:stretch!important;
+}
+body.product-plant .v4-eq{min-width:0!important;flex:1 1 0!important;width:auto!important}
+body.product-plant .v4-eq.ch{min-width:0!important;flex:1.45 1 0!important}
+body.product-plant .v4-flow-svg{width:clamp(66px,7vw,104px)!important;height:auto!important;aspect-ratio:1!important;max-width:100%!important}
+body.product-plant .v4-eq.ch .v4-chiller-svg{width:min(100%,180px)!important;height:auto!important;max-height:105px!important}
+body.product-plant .v4-eq b{font-size:clamp(11px,.95vw,15px)!important;white-space:normal!important;text-align:center;line-height:1.25;max-width:100%}
+body.product-plant .v4-arrow{flex:0 1 clamp(22px,2.5vw,38px)!important;min-width:0!important;font-size:clamp(24px,2.25vw,36px)!important;margin-left:0!important;margin-right:0!important}
+
+/* trend chart must remain inside its card */
+body.product-plant .v4-trend-panel{overflow:hidden}
+body.product-plant .v4-trend{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:650/280!important;
+  max-height:290px!important;
+  overflow:hidden!important;
+}
+body.product-plant .v4-xlabels text,
+body.product-plant .v4-ylabels text{font-size:clamp(9px,.78vw,12px)!important}
+
+/* top KPI values also scale instead of forcing width */
+body.product-plant .ca-kpis{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+body.product-plant .ca-kpi{min-width:0!important;overflow:hidden}
+body.product-plant .ca-kpi>b{font-size:clamp(28px,2.4vw,38px)!important;white-space:normal!important;overflow-wrap:anywhere}
+body.product-plant .ca-kpi-label{font-size:clamp(12px,1vw,15px)!important}
+body.product-plant .ca-kpi>small{font-size:clamp(10px,.82vw,12px)!important}
+
+/* card titles cannot force a panel wider than its grid track */
+body.product-plant .v4-card-title{min-width:0;flex:1 1 auto}
+body.product-plant .v4-card-title strong{font-size:clamp(19px,1.55vw,24px)!important;white-space:normal!important}
+body.product-plant .v4-card-title small{font-size:clamp(10px,.84vw,13px)!important;white-space:normal!important}
+body.product-plant .v4-panel-head{flex-wrap:wrap}
+
+/* responsive checkpoints based on actual content width after the sidebar */
+@media(max-width:1450px){
+  body.product-plant .v4-top-grid{grid-template-columns:minmax(0,.98fr) minmax(0,1.52fr)!important}
+  body.product-plant .v4-gauge{width:clamp(215px,20vw,275px)!important}
+  body.product-plant .v4-chiller-svg{max-height:96px!important}
+  body.product-plant .v4-chiller-card{min-height:300px!important}
+  body.product-plant .v4-ai-badge{max-width:55%}
+}
+@media(max-width:1280px){
+  body.product-plant .v4-top-grid,body.product-plant .v4-mid-grid{grid-template-columns:1fr!important}
+  body.product-plant .v4-eff-body{grid-template-columns:minmax(0,1fr) minmax(150px,190px)!important}
+  body.product-plant .v4-chiller-row{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body.product-plant .v4-ai-badge{max-width:100%}
+  body.product-plant .v4-flow-row{overflow-x:auto!important;justify-content:flex-start!important;padding-bottom:16px!important}
+  body.product-plant .v4-eq{flex:0 0 120px!important}
+  body.product-plant .v4-eq.ch{flex:0 0 180px!important}
+  body.product-plant .v4-arrow{flex:0 0 32px!important}
+}
+@media(max-width:900px){
+  body.product-plant .ca-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.product-plant .v4-eff-body{grid-template-columns:1fr!important}
+  body.product-plant .v4-metrics{grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
+  body.product-plant .v4-chiller-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
