@@ -1,0 +1,91 @@
+/* V6 AI Energy Analyst — chart units, corrected donut center, productized opportunities/risks/copilot */
+body.product-analyst .analyst-v6{display:grid;gap:14px;min-width:0}
+body.product-analyst .analyst-v6 *{box-sizing:border-box}
+
+/* Cards */
+body.product-analyst .v6-card{min-width:0;overflow:hidden;border:1px solid color-mix(in srgb,var(--blue) 15%,var(--line));border-radius:17px;background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 99%,#fff),color-mix(in srgb,var(--surface2) 93%,#fff));box-shadow:0 12px 30px rgba(43,94,131,.09);padding:18px}
+body.theme-dark.product-analyst .v6-card{background:linear-gradient(180deg,#0c2943,#081e32);border-color:#214d68;box-shadow:0 15px 34px rgba(0,0,0,.28)}
+body.product-analyst .v6-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;min-width:0}
+body.product-analyst .v6-card-title{display:flex;align-items:center;gap:10px;min-width:0;color:var(--ink);font-size:22px;font-weight:900;letter-spacing:-.01em}
+body.product-analyst .v6-title-icon{width:31px;height:31px;border-radius:9px;display:grid;place-items:center;flex:0 0 31px;background:linear-gradient(135deg,#32bdfd,#1687e2);color:#fff;box-shadow:0 5px 13px rgba(25,151,240,.18)}
+body.product-analyst .v6-title-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+body.product-analyst .v6-subtitle{font-size:12px;color:var(--muted);font-weight:700}
+
+/* Trend + opportunity row */
+body.product-analyst .v6-mid-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(360px,.72fr);gap:14px;align-items:stretch}
+body.product-analyst .v6-trend-card{min-height:410px}
+body.product-analyst .v6-opportunity-card{min-height:410px}
+body.product-analyst .v6-chart-legend{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:750}
+body.product-analyst .v6-chart-legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+body.product-analyst .v6-chart-legend i{width:22px;height:3px;border-radius:4px;display:inline-block}
+body.product-analyst .v6-chart-legend .goal{background:#258fe8;border-top:2px dashed #258fe8;height:0}
+body.product-analyst .v6-chart-legend .actual{background:#684de0}
+body.product-analyst .v6-chart-legend .baseline{background:#1eb8c9}
+.v6-analyst-trend{width:100%;height:auto;max-height:325px;display:block;margin-top:4px;overflow:hidden}
+.v6-grid line{stroke:color-mix(in srgb,var(--blue) 14%,var(--line));stroke-width:1;stroke-dasharray:4 5}
+.v6-highlight{fill:color-mix(in srgb,var(--blue) 7%,transparent)}
+.v6-axis-unit,.v6-ylabels text,.v6-xlabels text{fill:var(--muted);font-weight:750}
+.v6-axis-unit{font-size:14px}.v6-ylabels text,.v6-xlabels text{font-size:12px}
+.v6-chart-line{fill:none;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.v6-chart-line.goal{stroke:#258fe8;stroke-dasharray:10 8}.v6-chart-line.actual{stroke:#684de0}.v6-chart-line.baseline{stroke:#1eb8c9}
+.v6-focus-line{stroke:#efa928;stroke-width:2;stroke-dasharray:7 6}.v6-focus-dot{fill:var(--surface);stroke:#258fe8;stroke-width:4}
+.v6-annotation{fill:#4c7ca2;font-size:12px;font-weight:850}.theme-dark.product-analyst .v6-annotation{fill:#91c7e7}
+
+/* Donut — absolute center, no drifting text */
+body.product-analyst .v6-donut-layout{display:grid;grid-template-columns:minmax(190px,240px) minmax(150px,1fr);gap:22px;align-items:center;justify-content:center;margin-top:18px}
+body.product-analyst .v6-donut{position:relative;width:min(240px,100%);aspect-ratio:1;border-radius:50%;justify-self:center;background:conic-gradient(#2094ed 0 38%,#1eb8c9 38% 65%,#14ae73 65% 83%,#f2ad22 83% 93%,#7895aa 93% 100%);box-shadow:0 16px 34px rgba(31,111,171,.11)}
+body.product-analyst .v6-donut:after{content:"";position:absolute;inset:43px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--blue) 8%,transparent)}
+body.product-analyst .v6-donut-center{position:absolute;inset:43px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;padding:8px;transform:none}
+body.product-analyst .v6-donut-value{font-size:30px;font-weight:950;color:var(--ink);letter-spacing:-.035em;white-space:nowrap}
+body.product-analyst .v6-donut-unit{font-size:16px;font-weight:800;color:var(--muted);margin-top:8px}
+body.product-analyst .v6-donut-label{font-size:12px;font-weight:750;color:var(--muted);margin-top:7px;white-space:nowrap}
+body.product-analyst .v6-donut-legend{display:grid;gap:13px;min-width:0}
+body.product-analyst .v6-donut-legend>div{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:9px;align-items:center;font-size:14px;color:var(--text);font-weight:700}
+body.product-analyst .v6-donut-legend i{width:11px;height:11px;border-radius:50%}.v6-donut-legend .d1{background:#2094ed}.v6-donut-legend .d2{background:#1eb8c9}.v6-donut-legend .d3{background:#14ae73}.v6-donut-legend .d4{background:#f2ad22}.v6-donut-legend .d5{background:#7895aa}
+body.product-analyst .v6-donut-legend b{font-size:16px;color:var(--ink);font-weight:900}
+
+/* Bottom 3 cards */
+body.product-analyst .v6-bottom-grid{display:grid;grid-template-columns:1.03fr 1.03fr .94fr;gap:14px;align-items:stretch}
+body.product-analyst .v6-bottom-grid>.v6-card{min-height:355px}
+
+/* Opportunity list */
+.v6-list{display:grid;gap:9px;margin-top:6px}
+.v6-list-item{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:11px;align-items:center;min-height:64px;border:1px solid color-mix(in srgb,var(--blue) 11%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--surface2) 62%,var(--surface));transition:.18s ease}
+.v6-list-item:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--blue) 30%,var(--line))}
+.v6-rank{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:950;background:color-mix(in srgb,var(--green) 13%,var(--surface));color:var(--green);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 12%,transparent)}
+.v6-item-copy{min-width:0}.v6-item-copy b{display:block;font-size:14px;color:var(--ink);line-height:1.25}.v6-item-copy small{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:4px}
+.v6-benefit{text-align:right;white-space:nowrap}.v6-benefit strong{display:block;font-size:14px;color:var(--green)}.v6-benefit span{font-size:10px;color:var(--muted)}
+
+/* Risks */
+.v6-list-item.risk .v6-rank{background:color-mix(in srgb,var(--red) 11%,var(--surface));color:var(--red)}
+.v6-severity{justify-self:end;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850;white-space:nowrap}
+.v6-severity.high{color:var(--red);background:color-mix(in srgb,var(--red) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--red) 28%,var(--line))}
+.v6-severity.medium{color:var(--amber);background:color-mix(in srgb,var(--amber) 11%,var(--surface));border:1px solid color-mix(in srgb,var(--amber) 31%,var(--line))}
+.v6-severity.low{color:var(--green);background:color-mix(in srgb,var(--green) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--green) 25%,var(--line))}
+
+/* AI Copilot */
+.v6-copilot{display:flex;flex-direction:column;min-height:355px}
+.v6-ai-status{display:flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:800}.v6-ai-status i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px color-mix(in srgb,var(--green) 55%,transparent)}
+.v6-prompts{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 10px}.v6-prompt{border:1px solid color-mix(in srgb,var(--blue) 22%,var(--line));background:color-mix(in srgb,var(--blue) 4%,var(--surface));color:var(--blue);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:750;cursor:pointer}
+.v6-chat{display:grid;gap:9px;flex:1;align-content:start}
+.v6-bubble{max-width:92%;padding:10px 12px;border-radius:13px;font-size:12px;line-height:1.55}
+.v6-bubble.user{justify-self:end;background:linear-gradient(135deg,#209af1,#187ecb);color:#fff;border-bottom-right-radius:4px}
+.v6-bubble.ai{justify-self:start;background:color-mix(in srgb,var(--surface2) 85%,var(--surface));color:var(--text);border:1px solid var(--line);border-bottom-left-radius:4px}
+.v6-ai-label{display:block;font-size:10px;font-weight:900;color:var(--purple);margin-bottom:4px}
+.v6-copilot-actions{display:flex;gap:7px;margin-top:7px}.v6-mini-action{font-size:10px;border:1px solid var(--line);color:var(--muted);background:var(--surface);border-radius:7px;padding:5px 8px}
+.v6-input-row{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:8px;margin-top:10px}
+.v6-input-row input{min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:10px 12px;font-size:12px;outline:none}.v6-input-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 10%,transparent)}
+.v6-send{border:0;border-radius:10px;background:linear-gradient(135deg,#27a9f4,#1578cf);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 6px 14px rgba(25,140,224,.20)}
+
+/* Better analyst cards above, without changing content semantics */
+body.product-analyst .analyst-v6 .ca-hero{min-height:112px;padding:18px 23px}
+body.product-analyst .analyst-v6 .ca-hero h1{font-size:38px}
+body.product-analyst .analyst-v6 .ca-hero p{font-size:14px}
+body.product-analyst .analyst-v6 .ca-kpi{min-height:136px;padding:15px 16px}
+body.product-analyst .analyst-v6 .ca-kpi-label{font-size:14px}.analyst-v6 .ca-kpi-label>span{font-size:28px}
+body.product-analyst .analyst-v6 .ca-kpi>b{font-size:34px}.analyst-v6 .ca-kpi>small{font-size:11px}
+body.product-analyst .v6-demo-note{text-align:right;color:var(--muted);font-size:10px;padding:0 4px 3px}
+
+@media(max-width:1500px){body.product-analyst .v6-mid-grid{grid-template-columns:minmax(0,1.3fr) minmax(330px,.7fr)}body.product-analyst .v6-bottom-grid{grid-template-columns:1fr 1fr}.v6-copilot{grid-column:1/-1}.v6-donut-layout{grid-template-columns:210px 1fr!important}.v6-donut{width:210px!important}.v6-donut:after,.v6-donut-center{inset:39px!important}.v6-donut-value{font-size:26px!important}}
+@media(max-width:1180px){body.product-analyst .v6-mid-grid,body.product-analyst .v6-bottom-grid{grid-template-columns:1fr}.v6-copilot{grid-column:auto}.v6-trend-card,.v6-opportunity-card{min-height:auto}.v6-analyst-trend{max-height:none}}
+@media(max-width:720px){body.product-analyst .v6-card{padding:13px}.v6-card-title{font-size:18px!important}.v6-donut-layout{grid-template-columns:1fr!important}.v6-donut{width:220px!important}.v6-list-item{grid-template-columns:34px minmax(0,1fr)}.v6-benefit,.v6-severity{grid-column:2;justify-self:start;text-align:left}.v6-input-row{grid-template-columns:1fr 40px}.v6-bubble{max-width:96%}}
