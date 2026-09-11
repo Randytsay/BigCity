@@ -1,0 +1,129 @@
+/* Big City EMS + AI V2 product visual pass
+   Goals: Siemens-like visual hierarchy, larger graphics, readable type, corrected circular charts,
+   more realistic chiller SVGs, stronger light/dark parity. Loaded last on purpose. */
+
+/* ---------------------------------------------------------------------
+   1) Global readable product scale
+------------------------------------------------------------------------ */
+body.command-mode .workspace,
+body.product-plant .workspace,
+body.product-analyst .workspace{max-width:1820px;padding:10px 14px 14px}
+
+body.command-mode .nav-item,
+body.product-plant .nav-item,
+body.product-analyst .nav-item{font-size:14px;min-height:48px;gap:10px}
+body.command-mode .nav-ico,
+body.product-plant .nav-ico,
+body.product-analyst .nav-ico{width:31px;height:31px}
+
+body.command-mode .footer,
+body.product-plant .footer,
+body.product-analyst .footer{font-size:10px}
+
+/* Shared legacy dashboard typography used by performance/executive pages */
+.card-title{font-size:18px;line-height:1.25}.card-title .spark{font-size:23px}
+.card-sub,.more{font-size:12px}
+.kpi-card{min-height:122px;padding:15px 16px;grid-template-columns:50px 1fr;gap:12px}
+.kpi-icon{width:50px;height:50px;font-size:26px}.kpi-card .label{font-size:14px}.kpi-value{font-size:34px}.kpi-value small{font-size:14px}.change{font-size:12px}
+th,td{font-size:12px;padding:10px 11px}.mini-row b{font-size:12px}.mini-row small{font-size:10px}.rank-dot{width:30px;height:30px;font-size:12px}
+.chart-box{height:260px}.chart-box.small{height:225px}.axis-label{font-size:11px}.chart-line{stroke-width:3.5}
+
+/* ---------------------------------------------------------------------
+   2) Fix ALL circular charts / gauges — center content properly
+------------------------------------------------------------------------ */
+.donut-wrap{gap:30px;align-items:center;justify-content:flex-start;min-height:240px;padding:6px 8px}
+.donut{width:220px;height:220px;flex:0 0 220px;box-shadow:0 10px 24px color-mix(in srgb,var(--blue) 11%,transparent)}
+.donut:after{inset:42px}
+.donut-center{
+  position:absolute!important;inset:0!important;z-index:3!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  text-align:center!important;line-height:1.18!important;font-size:16px!important;font-weight:900!important;color:var(--ink)!important;
+  padding:48px!important;transform:none!important;
+}
+.legend{gap:12px;font-size:15px;line-height:1.35}.legend span{gap:10px}.legend i{width:14px;height:14px;flex:0 0 14px}
+
+.scorecard{grid-template-columns:140px 1fr;gap:18px}.score-ring{width:128px;height:128px}.score-ring:before{inset:15px}.score-ring b{font-size:34px}.score-meta h3{font-size:18px}.score-meta p{font-size:12px}.grade{font-size:34px}
+
+.exec-ytd-ring{width:108px;height:108px}.exec-ytd-ring:after{inset:18px}.exec-ytd-ring b{font-size:25px!important;margin:0!important;line-height:1!important}
+
+.cc-donut{width:190px!important;height:190px!important;flex:0 0 190px}.cc-donut:before{inset:36px!important}.cc-donut>div{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;position:absolute!important;inset:36px!important;z-index:2}.cc-donut strong{font-size:30px!important;line-height:1!important}.cc-donut small{font-size:13px!important;margin-top:5px}.cc-donut-content{gap:28px!important;justify-content:flex-start!important;padding:12px 8px!important}.cc-donut-legend{gap:11px!important;min-width:210px!important}.cc-donut-legend span{font-size:13px!important;grid-template-columns:12px 1fr auto!important;gap:9px!important}.cc-donut-legend i{width:11px!important;height:11px!important}.cc-donut-legend b{font-size:14px!important}
+
+.opp-donut{width:185px!important;height:185px!important}.opp-donut:before{inset:38px!important}.opp-donut b{font-size:25px!important;line-height:1!important;margin:0!important}.opp-donut span{font-size:12px!important;margin-top:5px}.opp-body{gap:24px!important;justify-content:flex-start!important;padding:8px 10px}.opp-body p{font-size:13px!important;margin:10px 0!important;gap:28px!important}.opp-body p b{font-size:14px!important}
+
+.ca-gauge{width:260px!important;height:260px!important;aspect-ratio:1!important}.ca-gauge:before{inset:22px!important}.ca-gauge>div{position:absolute!important;inset:35px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}.ca-gauge b{font-size:58px!important;line-height:.98!important;margin:7px 0!important}.ca-gauge small{font-size:14px!important}.ca-gauge span{font-size:16px!important}
+
+/* ---------------------------------------------------------------------
+   3) Command Center — make one big visual per section
+------------------------------------------------------------------------ */
+body.command-mode .cc-titlebar{min-height:105px!important;padding:18px 24px!important;border-radius:16px!important}
+body.command-mode .cc-titlebar h1{font-size:38px!important;line-height:1.05!important}.cc-titlebar p{font-size:18px!important}.cc-eyebrow{font-size:12px!important}.cc-title-meta{font-size:12px!important}
+
+body.command-mode .cc-kpi-row{gap:10px!important}.cc-kpi,.cc-efficiency{min-height:155px!important;border-radius:14px!important}.cc-kpi{padding:17px 18px!important}.cc-kpi-label{font-size:15px!important}.cc-svg-icon{width:31px!important;height:31px!important}.cc-svg-icon svg{width:29px!important;height:29px!important}.cc-kpi-value{font-size:42px!important;margin:15px 0 10px!important}.cc-kpi-value small{font-size:17px!important}.cc-kpi-foot{font-size:12px!important}.cc-status-main{font-size:31px!important}
+.cc-efficiency{padding:10px 12px 14px!important}.cc-gauge{width:190px!important;height:125px!important}.cc-gauge:before{inset:12px 13px 0!important}.cc-gauge-core strong{font-size:41px!important}.cc-gauge-core span,.cc-gauge-core small{font-size:13px!important}.cc-benchmark{font-size:11px!important;padding:6px 12px!important}
+
+body.command-mode .cc-main-grid{grid-template-columns:minmax(0,1.55fr) minmax(440px,.85fr)!important;gap:12px!important}
+body.command-mode .cc-bottom-grid{grid-template-columns:1.05fr 1fr 1.25fr!important;gap:12px!important}.cc-panel{padding:16px!important;border-radius:14px!important}.cc-panel-title{font-size:19px!important}.cc-panel-head>span,.cc-more{font-size:11px!important}.cc-tabs button{font-size:11px!important;padding:7px 14px!important}
+.cc-chart-wrap{height:300px!important}.cc-chart-line{stroke-width:3.7!important}.cc-chart-compare{stroke-width:2.1!important}.cc-chart-labels text{font-size:10.5px!important}.cc-tooltip{padding:8px 12px!important}.cc-tooltip small{font-size:10px!important}.cc-tooltip b{font-size:16px!important}.cc-legend{font-size:11px!important;gap:24px!important}
+.cc-ai-list{gap:10px!important}.cc-ai-item{grid-template-columns:42px 1fr auto!important;gap:12px!important;padding:13px!important;border-radius:12px!important}.cc-rank{width:38px!important;height:38px!important;font-size:16px!important}.cc-ai-item b{font-size:14px!important}.cc-ai-item p{font-size:12px!important;line-height:1.55!important}.cc-ai-item small{font-size:11px!important}.cc-action{font-size:11px!important;padding:9px 12px!important}
+.cc-bars{height:220px!important}.cc-bar-group span{font-size:10px!important}.cc-tr{min-height:34px!important}.cc-tr span{font-size:11px!important;padding:7px 9px!important}
+
+/* ---------------------------------------------------------------------
+   4) Chiller cockpit — match approved concept with large equipment
+------------------------------------------------------------------------ */
+.ca-page{gap:12px!important}.ca-hero{min-height:112px!important;padding:17px 22px!important;border-radius:15px!important;background-size:auto,650px 100%!important}.ca-hero h1{font-size:39px!important}.ca-hero p{font-size:15px!important}.ca-hero span{font-size:11px!important}.ca-mode-note{font-size:11px!important;padding:8px 12px!important}
+
+.ca-kpis{gap:10px!important}.ca-kpi{min-height:142px!important;padding:16px 17px!important;border-radius:14px!important}.ca-kpi-label{font-size:15px!important}.ca-kpi-label>span{font-size:32px!important}.ca-kpi>b{font-size:38px!important;margin:9px 0 7px!important}.ca-kpi>small{font-size:12px!important;line-height:1.35!important}.ca-card{padding:15px!important;border-radius:14px!important}.ca-card-title{font-size:19px!important}.ca-card-title small{font-size:11px!important}.ai-badge{font-size:12px!important;padding:7px 11px!important}
+
+.plant-top{grid-template-columns:.83fr 1.67fr!important;gap:12px!important}.plant-mid{grid-template-columns:1.42fr .95fr!important;gap:12px!important}.plant-bottom{grid-template-columns:1.9fr .8fr!important;gap:12px!important}.plant-eff-body{grid-template-columns:1.18fr .82fr!important;gap:16px!important;margin-top:12px!important}.plant-metrics{gap:8px!important}.plant-metrics>div{padding:10px 12px!important}.plant-metrics span{font-size:11px!important}.plant-metrics b{font-size:23px!important}
+
+.chiller-row{gap:8px!important;margin-top:12px!important}.chiller{min-height:255px!important;padding:10px 8px 12px!important;border-radius:12px!important}.ca-machine{width:165px!important;height:92px!important;overflow:visible!important;stroke-linecap:round;stroke-linejoin:round}.chiller>b{font-size:16px!important;margin-top:4px!important}.chiller>small{font-size:12px!important}.dot{width:11px!important;height:11px!important;margin:7px!important}.load{height:8px!important;margin:9px 0 6px!important}.chiller strong{font-size:18px!important}.chiller em{font-size:11px!important;margin-top:4px!important}
+
+/* realistic chiller SVG styling */
+.ca-machine .ch-shadow{fill:rgba(0,0,0,.14);stroke:none}.ca-machine .ch-base,.ca-machine .ch-foot{fill:color-mix(in srgb,var(--muted) 36%,var(--surface3));stroke:color-mix(in srgb,var(--muted) 85%,var(--line));stroke-width:1.2}.ca-machine .ch-vessel{fill:color-mix(in srgb,var(--blue) 12%,var(--surface3));stroke:color-mix(in srgb,var(--muted) 78%,var(--line));stroke-width:1.35}.ca-machine .ch-vessel-high{fill:color-mix(in srgb,var(--blue) 17%,var(--surface3))}.ca-machine .ch-compressor,.ca-machine .ch-motor{fill:color-mix(in srgb,var(--blue) 22%,var(--surface3));stroke:color-mix(in srgb,var(--muted) 90%,var(--line));stroke-width:1.25}.ca-machine .ch-panel{fill:color-mix(in srgb,var(--ink) 7%,var(--surface2));stroke:color-mix(in srgb,var(--muted) 90%,var(--line));stroke-width:1.15}.ca-machine .ch-pipes,.ca-machine .ch-bolts{fill:color-mix(in srgb,var(--surface) 85%,transparent);stroke:color-mix(in srgb,var(--muted) 86%,var(--line));stroke-width:1.25}
+.chiller.on .ca-machine .ch-vessel{fill:color-mix(in srgb,var(--cyan) 32%,var(--surface3));stroke:var(--cyan)}.chiller.on .ca-machine .ch-vessel-high,.chiller.on .ca-machine .ch-compressor,.chiller.on .ca-machine .ch-motor{fill:color-mix(in srgb,var(--cyan) 42%,var(--surface3));stroke:color-mix(in srgb,var(--cyan) 86%,white)}.chiller.on .ca-machine .ch-panel{stroke:var(--green)}.chiller.fault .ca-machine{filter:drop-shadow(0 6px 12px color-mix(in srgb,var(--red) 20%,transparent))}.chiller.fault .ca-machine .ch-vessel,.chiller.fault .ca-machine .ch-compressor{stroke:var(--red)}
+
+/* Flow diagram is intentionally oversized */
+.flow-wrap{min-height:195px!important;padding:12px 14px 4px!important;margin-top:10px!important;gap:0!important}.flow-wrap>div{min-width:130px!important}.flow-wrap b{font-size:13px!important;margin-top:5px!important}.ca-flow-icon{width:92px!important;height:92px!important;stroke-width:1.9!important}.flow-wrap .ca-machine{width:180px!important;height:92px!important}.pipe{min-width:48px!important;height:4px!important}.pipe:after{width:10px!important;height:10px!important;border-width:3px 3px 0 0!important}.eq-real .eq-fill{fill:color-mix(in srgb,var(--blue) 10%,var(--surface3))}
+
+.trend-svg{height:260px!important}.trend-svg.big{height:300px!important}.trend-svg polyline{stroke-width:3.4!important}.mini-tabs>*{font-size:11px!important;padding:6px 11px!important}
+.recommend-list{margin-top:10px!important}.rec{grid-template-columns:36px 175px 1fr 1.1fr 84px!important;gap:10px!important;padding:11px 3px!important;min-height:56px!important}.rec>span{width:32px!important;height:32px!important;font-size:13px!important}.rec b{font-size:13px!important}.rec p,.rec em{font-size:11px!important;line-height:1.45!important}.rec strong{font-size:10px!important;padding:6px 9px!important}.alert-list{gap:8px!important}.alert{padding:11px!important;font-size:11px!important}.alert b{font-size:10px!important}
+
+/* ---------------------------------------------------------------------
+   5) AI Analyst — bigger insight chain and charts
+------------------------------------------------------------------------ */
+.analyst-kpis{grid-template-columns:repeat(5,minmax(170px,1fr))!important}.analyst-main{grid-template-columns:1.67fr .72fr!important;gap:12px!important}.analyst-mid{grid-template-columns:1.5fr .72fr!important;gap:12px!important}.analyst-bottom{grid-template-columns:1fr 1fr .92fr!important;gap:12px!important}.issue-sub{font-size:13px!important;line-height:1.5!important;margin:9px 0 13px!important}.risk-chip{font-size:11px!important;padding:7px 10px!important}.reason-chain{gap:8px!important}.reason{min-height:165px!important;padding:13px!important;border-radius:11px!important}.reason b{font-size:15px!important}.reason p{font-size:12px!important;line-height:1.55!important;margin-top:10px!important}.arrow{font-size:22px!important}.timeline-list{margin-top:10px!important}.timeline-list>div{grid-template-columns:52px 15px 1fr!important;min-height:58px!important}.timeline-list time{font-size:12px!important}.t-dot{width:11px!important;height:11px!important}.timeline-list p{font-size:12px!important;line-height:1.45!important}.rank-list>div{grid-template-columns:34px 1fr auto!important;padding:10px 0!important}.rank-list span{width:31px!important;height:31px!important;font-size:12px!important}.rank-list b,.rank-list strong{font-size:12px!important}.copilot{gap:9px!important}.copilot button,.answer,.copilot input{font-size:11px!important;padding:10px!important}.answer{line-height:1.55!important}
+
+/* ---------------------------------------------------------------------
+   6) Executive page — readable circles and stronger typography
+------------------------------------------------------------------------ */
+.exec-summary-strip{font-size:18px!important;padding:13px 16px!important}.exec-kpi{min-height:165px!important;padding:15px 17px!important}.exec-kpi-icon{width:50px!important;height:50px!important;font-size:25px!important}.exec-kpi-title{font-size:16px!important}.exec-kpi-status{font-size:11px!important}.exec-kpi-value{font-size:42px!important}.exec-kpi-value small{font-size:16px!important}.exec-kpi-meta{font-size:12px!important}.exec-kpi-good{font-size:13px!important}.exec-card-title{font-size:18px!important}.exec-site h3{font-size:14px!important}.exec-site-value{font-size:29px!important}.exec-site-target,.exec-site-note{font-size:11px!important}.exec-ytd-item span{font-size:11px!important}.exec-ytd-item b{font-size:27px!important}.exec-ytd-item small{font-size:10px!important}.exec-list-row b{font-size:12px!important}.exec-list-row small{font-size:10px!important}.exec-benefit{font-size:14px!important}.exec-roi-item b{font-size:21px!important}.exec-decision b{font-size:11px!important}.exec-decision small{font-size:9px!important}
+
+/* ---------------------------------------------------------------------
+   7) Theme polish
+------------------------------------------------------------------------ */
+body.theme-light .donut,
+body.theme-light .cc-donut,
+body.theme-light .opp-donut,
+body.theme-light .ca-gauge,
+body.theme-light .score-ring,
+body.theme-light .exec-ytd-ring{filter:drop-shadow(0 10px 20px rgba(30,105,160,.08))}
+body.theme-dark .donut,
+body.theme-dark .cc-donut,
+body.theme-dark .opp-donut,
+body.theme-dark .ca-gauge,
+body.theme-dark .score-ring,
+body.theme-dark .exec-ytd-ring{filter:drop-shadow(0 10px 24px rgba(0,0,0,.24))}
+
+/* ---------------------------------------------------------------------
+   8) Responsive fallbacks
+------------------------------------------------------------------------ */
+@media(max-width:1500px){
+  .ca-machine{width:135px!important;height:80px!important}.chiller{min-height:230px!important}.flow-wrap>div{min-width:110px!important}.flow-wrap .ca-machine{width:150px!important}.ca-flow-icon{width:80px!important;height:80px!important}
+  .cc-kpi-value{font-size:36px!important}.cc-chart-wrap{height:260px!important}
+}
+@media(max-width:1180px){
+  .plant-top,.plant-mid,.plant-bottom,.analyst-main,.analyst-mid,.analyst-bottom{grid-template-columns:1fr!important}.chiller-row{grid-template-columns:repeat(3,1fr)!important}.ca-machine{width:170px!important}.donut-wrap{flex-wrap:wrap}.flow-wrap{overflow:auto!important;justify-content:flex-start!important}
+}
+@media(max-width:760px){
+  .card-title,.ca-card-title,.cc-panel-title,.exec-card-title{font-size:16px!important}.ca-hero h1,.cc-titlebar h1{font-size:28px!important}.ca-kpi>b,.cc-kpi-value{font-size:30px!important}.donut{width:180px;height:180px;flex-basis:180px}.donut:after{inset:36px}.legend{font-size:13px}.ca-gauge{width:210px!important;height:210px!important}.ca-gauge b{font-size:46px!important}.chiller-row{grid-template-columns:repeat(2,1fr)!important}.rec{grid-template-columns:34px 1fr auto!important}.rec p,.rec em{grid-column:2/-1}.reason-chain{grid-template-columns:1fr!important}.reason-chain .arrow{transform:rotate(90deg)}
+}
