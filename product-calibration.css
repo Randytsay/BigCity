@@ -1,0 +1,79 @@
+/* Visual calibration against approved Big City × Delta product comps */
+
+/* --- Shared product shell ------------------------------------------------ */
+body.product-plant .shell,body.product-analyst .shell,body.command-mode .shell{grid-template-columns:192px 1fr;grid-template-rows:48px auto}
+body.product-plant .global-header,body.product-analyst .global-header,body.command-mode .global-header{height:48px;padding:0 16px 0 18px}
+body.product-plant .sidebar,body.product-analyst .sidebar,body.command-mode .sidebar{top:48px;height:calc(100vh - 48px)}
+body.product-plant .workspace,body.product-analyst .workspace,body.command-mode .workspace{max-width:1760px;padding:7px 10px 8px}
+body.product-plant .brand-snapshot-top,body.product-analyst .brand-snapshot-top,body.command-mode .brand-snapshot-top{width:440px;height:46px;padding-left:138px}
+body.product-plant .brand-snapshot:before,body.product-analyst .brand-snapshot:before,body.command-mode .brand-snapshot:before{width:128px;height:38px}
+body.product-plant .brand-snapshot-top:after,body.product-analyst .brand-snapshot-top:after,body.command-mode .brand-snapshot-top:after{font-size:14px}
+body.product-plant .global-actions,body.product-analyst .global-actions,body.command-mode .global-actions{gap:8px;font-size:10px}
+body.product-plant .status-pill,body.product-analyst .status-pill,body.command-mode .status-pill{padding:5px 9px}
+body.product-plant .nav-list,body.product-analyst .nav-list,body.command-mode .nav-list{gap:5px;padding:9px 7px}
+body.product-plant .nav-item,body.product-analyst .nav-item,body.command-mode .nav-item{min-height:43px;padding:8px 10px;font-size:12px}
+body.product-plant .nav-ico,body.product-analyst .nav-ico,body.command-mode .nav-ico{width:28px;height:28px}
+body.product-plant .side-visual,body.product-analyst .side-visual,body.command-mode .side-visual{height:310px!important}
+body.product-plant .side-photo,body.product-analyst .side-photo,body.command-mode .side-photo{height:174px!important;filter:saturate(.85) contrast(.98)}
+body.product-plant .side-copy,body.product-analyst .side-copy,body.command-mode .side-copy{min-height:136px;padding:10px 16px 14px!important}
+
+/* --- Chiller / analyst hero -------------------------------------------- */
+.ca-page{gap:8px}
+.ca-hero{min-height:82px;padding:12px 18px;border-radius:12px;position:relative;overflow:hidden;background-image:linear-gradient(90deg,var(--surface) 0%,color-mix(in srgb,var(--surface) 97%,transparent) 51%,color-mix(in srgb,var(--surface) 77%,transparent) 67%,color-mix(in srgb,var(--surface) 32%,transparent) 100%),var(--banner)!important;background-size:auto,540px 100%;background-repeat:no-repeat;background-position:left top,right center}
+.ca-hero:after{content:"";position:absolute;right:0;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--blue) 6%,transparent));pointer-events:none}
+.ca-hero>div{position:relative;z-index:1}.ca-hero>div:first-child{max-width:780px}.ca-hero span{font-size:9px;letter-spacing:.16em}.ca-hero h1{font-size:29px;line-height:1.02;margin:3px 0 3px;letter-spacing:.015em}.ca-hero p{font-size:11px;line-height:1.4}.ca-mode-note{font-size:9px;padding:6px 10px;backdrop-filter:blur(10px);font-weight:800}
+
+/* --- KPI density, type scale, icon scale ------------------------------- */
+.ca-kpis{gap:7px;grid-template-columns:repeat(6,minmax(128px,1fr))}.analyst-kpis{grid-template-columns:repeat(5,minmax(145px,1fr))}
+.ca-kpi{min-height:106px;border-radius:11px;padding:11px 12px;position:relative;overflow:hidden}
+.ca-kpi:after{content:"";position:absolute;right:-24px;bottom:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 8%,transparent),transparent 70%);pointer-events:none}
+.ca-kpi-label{font-size:11px;gap:7px}.ca-kpi-label>span{font-size:25px;line-height:1}.ca-kpi>b{font-size:27px;line-height:1.05;margin:7px 0 5px}.ca-kpi>small{font-size:8.5px;font-weight:650}
+.ca-card{border-radius:11px;padding:10px}.ca-card-title{font-size:14px;letter-spacing:.01em}.ca-card-title small{font-size:8px}.ai-badge{font-size:9px;padding:5px 8px}
+
+/* --- Chiller cockpit proportions -------------------------------------- */
+.plant-top{grid-template-columns:.82fr 1.58fr;gap:8px}.plant-mid{grid-template-columns:1.28fr 1fr;gap:8px}.plant-bottom{grid-template-columns:1.9fr .75fr;gap:8px}
+.plant-eff-body{grid-template-columns:1.15fr .85fr;gap:9px;margin-top:7px}.ca-gauge{width:210px;box-shadow:0 0 34px color-mix(in srgb,var(--blue) 16%,transparent)}.ca-gauge:before{inset:17px}.ca-gauge b{font-size:43px}.ca-gauge small,.ca-gauge span{font-size:9px}.plant-metrics{gap:5px}.plant-metrics>div{padding:7px 9px;border-radius:8px}.plant-metrics span{font-size:8px}.plant-metrics b{font-size:17px;line-height:1.15}
+.chiller-row{gap:5px;margin-top:8px}.chiller{min-height:176px;border-radius:9px;padding:7px 6px;align-content:start}.ca-machine{width:112px;height:63px;stroke-width:1.15;filter:drop-shadow(0 7px 7px color-mix(in srgb,var(--ink) 12%,transparent))}.chiller.on .ca-machine{filter:drop-shadow(0 7px 9px color-mix(in srgb,var(--cyan) 18%,transparent))}.chiller>b{font-size:12px;margin-top:1px}.chiller>small{font-size:8.5px}.dot{width:9px;height:9px;margin:5px}.load{height:6px;margin:7px 0 4px}.chiller strong{font-size:13px}.chiller em{font-size:8px}
+
+/* --- Flow diagram: larger illustrated equipment and real piping -------- */
+.flow-wrap{min-height:126px;gap:0;margin-top:8px;padding:2px 8px 0}.flow-wrap>div{min-width:95px;gap:2px;position:relative}.flow-wrap b{font-size:9px}.ca-flow-icon{width:66px;height:66px;stroke-width:1.8;filter:drop-shadow(0 5px 6px color-mix(in srgb,var(--blue) 11%,transparent))}.flow-wrap .ca-machine{width:110px;height:66px}.pipe{height:3px;min-width:42px;flex:1;position:relative;font-size:0;border-radius:99px;background:currentColor;opacity:.9}.pipe:after{content:"";position:absolute;right:-1px;top:50%;width:8px;height:8px;border-top:3px solid currentColor;border-right:3px solid currentColor;transform:translateY(-50%) rotate(45deg)}.pipe.green{color:var(--green)}.pipe.blue{color:var(--blue)}
+
+/* --- Charts ------------------------------------------------------------ */
+.trend-svg{height:204px;margin-top:2px}.trend-svg.big{height:218px}.trend-svg .grid line{opacity:.85}.trend-svg polyline{stroke-width:2.6}.trend-svg .window{opacity:1}.mini-tabs>*{font-size:8px;padding:4px 9px}
+
+/* --- Recommendations / alerts ----------------------------------------- */
+.recommend-list{margin-top:6px}.rec{grid-template-columns:28px 138px 1fr 1.12fr 72px;gap:7px;padding:7px 2px;min-height:40px}.rec>span{width:25px;height:25px;font-size:10px}.rec b{font-size:10px}.rec p,.rec em{font-size:8.2px}.rec strong{font-size:8px;padding:4px 7px}.alert-list{gap:5px;margin-top:7px}.alert{padding:8px;font-size:8.8px;border-radius:7px}
+
+/* --- Analyst page geometry -------------------------------------------- */
+.analyst-main{grid-template-columns:1.62fr .72fr;gap:8px}.analyst-mid{grid-template-columns:1.48fr .62fr;gap:8px}.analyst-bottom{grid-template-columns:1fr 1fr .83fr;gap:8px}.issue-sub{font-size:9.5px;margin:6px 0 8px}.reason-chain{gap:5px}.reason{padding:9px;border-radius:8px;min-height:126px}.reason b{font-size:11px}.reason p{font-size:8.7px;line-height:1.5}.timeline-list{margin-top:6px}.timeline-list>div{min-height:42px}.timeline-list p{font-size:8.7px}.opp-body{gap:14px;margin-top:10px}.opp-donut{width:124px;height:124px}.rank-list>div{padding:6px 0}.rank-list b,.rank-list strong{font-size:8.7px}.copilot{gap:6px}.copilot button,.answer,.copilot input{font-size:8px}
+
+/* --- Dark calibration -------------------------------------------------- */
+body.theme-dark.product-plant,body.theme-dark.product-analyst{--bg:#061321;--surface:#092037;--surface2:#0d2943;--surface3:#113551;--ink:#effaff;--text:#d6eafb;--muted:#86a9c3;--line:#1b4f70;--blue:#19afff;--blue2:#51caff;--cyan:#19d6e7;--teal:#25d5b6;--green:#42e1a2;--red:#ff6a78;--amber:#ffc04c;--purple:#ad75ff;--shadow:0 12px 28px rgba(0,0,0,.23)}
+body.theme-dark.product-plant .ca-card,body.theme-dark.product-analyst .ca-card,body.theme-dark.product-plant .ca-kpi,body.theme-dark.product-analyst .ca-kpi{background:linear-gradient(180deg,#0b2943,#081c2e);border-color:#1c5271}
+body.theme-dark.product-plant .chiller,body.theme-dark.product-analyst .chiller,body.theme-dark.product-plant .plant-metrics>div,body.theme-dark.product-analyst .reason,body.theme-dark.product-analyst .copilot button,body.theme-dark.product-analyst .answer{background:linear-gradient(180deg,#0d2a43,#0a2135)}
+body.theme-dark.product-plant .ca-hero,body.theme-dark.product-analyst .ca-hero{background-image:linear-gradient(90deg,#071d30 0%,rgba(7,29,48,.98) 49%,rgba(7,29,48,.80) 68%,rgba(7,29,48,.28) 100%),var(--banner)!important}
+body.theme-dark.product-plant .ca-mode-note,body.theme-dark.product-analyst .ca-mode-note{background:rgba(7,28,45,.68);border-color:#255879;color:#9dc3da}
+
+/* --- Light calibration ------------------------------------------------- */
+body.theme-light.product-plant,body.theme-light.product-analyst{--bg:#eff6fb;--surface:#ffffff;--surface2:#f7fbff;--surface3:#e9f4fb;--ink:#083a70;--text:#315f87;--muted:#7392aa;--line:#d5e6f1;--blue:#1597f5;--blue2:#4ab9ff;--cyan:#13bcd4;--teal:#13b28b;--green:#0fa673;--red:#e95664;--amber:#eda51c;--purple:#714ce2;--shadow:0 8px 22px rgba(46,96,135,.09)}
+body.theme-light.product-plant,body.theme-light.product-analyst{background:linear-gradient(180deg,#fbfdff,#edf6fb)}
+body.theme-light.product-plant .global-header,body.theme-light.product-analyst .global-header{background:rgba(255,255,255,.95);border-bottom-color:#d8e7f0;box-shadow:0 5px 18px rgba(47,97,136,.07)}
+body.theme-light.product-plant .sidebar,body.theme-light.product-analyst .sidebar{background:linear-gradient(180deg,#fff,#f7fbfe);border-right-color:#d8e7f0}
+body.theme-light.product-plant .ca-hero,body.theme-light.product-analyst .ca-hero{background-image:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.98) 50%,rgba(255,255,255,.77) 68%,rgba(255,255,255,.22) 100%),var(--banner)!important}
+body.theme-light.product-plant .ca-card,body.theme-light.product-analyst .ca-card,body.theme-light.product-plant .ca-kpi,body.theme-light.product-analyst .ca-kpi{background:linear-gradient(180deg,#fff,#fbfdff);border-color:#d5e7f2;box-shadow:0 8px 20px rgba(47,97,136,.075)}
+body.theme-light.product-plant .ca-mode-note,body.theme-light.product-analyst .ca-mode-note{background:rgba(255,255,255,.78);border-color:#d4e6f1;color:#5f819b}
+body.theme-light.product-plant .chiller,body.theme-light.product-analyst .chiller,body.theme-light.product-plant .plant-metrics>div,body.theme-light.product-analyst .reason,body.theme-light.product-analyst .copilot button,body.theme-light.product-analyst .answer{background:linear-gradient(180deg,#fbfdff,#f5faff)}
+body.theme-light.product-plant .chiller.on{background:linear-gradient(180deg,#f5fffb,#f2fbff)}
+body.theme-light.product-plant .ca-machine{filter:drop-shadow(0 5px 7px rgba(33,88,125,.13))}
+body.theme-light.product-plant .pipe,body.theme-light.product-analyst .pipe{opacity:.82}
+
+/* --- Command center final proportional tuning ------------------------- */
+body.command-mode .cc-titlebar{min-height:82px;padding:12px 18px;border-radius:12px}
+body.command-mode .cc-titlebar h1{font-size:28px}.cc-titlebar p{font-size:14px}
+body.command-mode .cc-kpi-row{gap:7px}.cc-kpi,.cc-efficiency{min-height:120px;border-radius:11px}.cc-kpi{padding:12px}.cc-kpi-value{font-size:29px}.cc-kpi-label{font-size:11px}.cc-gauge{width:148px;height:92px}.cc-gauge-core strong{font-size:30px}
+body.command-mode .cc-main-grid,body.command-mode .cc-bottom-grid{gap:8px}.cc-panel{border-radius:11px;padding:10px}.cc-chart-wrap{height:202px}.cc-ai-item{padding:8px}.cc-donut{width:116px;height:116px}.cc-bars{height:142px}
+
+/* --- Responsive -------------------------------------------------------- */
+@media(max-width:1450px){body.product-plant .shell,body.product-analyst .shell,body.command-mode .shell{grid-template-columns:178px 1fr}.ca-machine{width:98px}.ca-gauge{width:190px}.flow-wrap>div{min-width:82px}}
+@media(max-width:1180px){.plant-top,.plant-mid,.plant-bottom,.analyst-main,.analyst-mid,.analyst-bottom{grid-template-columns:1fr}.chiller-row{grid-template-columns:repeat(3,1fr)}.ca-hero{background-size:auto,420px 100%}}
+@media(max-width:760px){body.product-plant .shell,body.product-analyst .shell,body.command-mode .shell{grid-template-columns:1fr}.ca-hero{min-height:96px;background-image:linear-gradient(90deg,var(--surface),color-mix(in srgb,var(--surface) 86%,transparent)),var(--banner)!important}.ca-kpis,.analyst-kpis{grid-template-columns:repeat(2,1fr)}.chiller-row{grid-template-columns:repeat(2,1fr)}.flow-wrap{overflow:auto;justify-content:flex-start}.pipe{min-width:34px}.ca-gauge{width:184px}}
