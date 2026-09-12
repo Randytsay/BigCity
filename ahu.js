@@ -11,7 +11,7 @@ function ahuTabs(active){
   const items=[['ahu-overview','06-1 改善總覽'],['ahu-unit','06-2 單台驗證'],['ahu-shadow','06-3 AI Shadow'],['ahu-contribution','06-4 AI 貢獻'],['ahu-health','06-5 舒適度・健康']];
   return `<div class="ahu-subtabs">${items.map(([v,t])=>`<button class="ahu-tab ${active===v?'active':''}" data-ahu-page="${v}">${t}</button>`).join('')}<div class="ahu-year">📅 2026 年</div></div>`;
 }
-function ahuPageHead(page,title,sub){return hero(title,sub)+ahuTabs(page)+`<div class="ahu-page-note">Demo Data｜示範數值，正式系統將依現場 BMS / EMS 與 M&amp;V 基線計算</div>`;}
+function ahuPageHead(page,title,sub){return hero(title,sub)+ahuTabs(page)+`<div class="ahu-page-note">資料來源｜BMS / EMS、設備感測與 M&amp;V 基線　｜　效益依驗證結果更新</div>`;}
 function ahuUnitSelect(){return `<select id="ahuUnitSelect">${Object.entries(ahuUnits).map(([id,u])=>`<option value="${id}" ${state.ahuUnit===id?'selected':''}>${id}｜${u.siteName}｜${u.type}</option>`).join('')}</select>`;}
 function ahuSiteSeg(){return `<div class="seg" data-control="ahuSite">${[['all','全部'],['main','巨城本館'],['creative','創藝大樓'],['cinema','威秀影城']].map(([v,t])=>`<button data-value="${v}" class="${state.ahuSite===v?'active':''}">${t}</button>`).join('')}</div>`;}
 function ahuTypeSeg(){return `<div class="seg" data-control="ahuType">${[['all','全部'],['ec','EC FAN'],['vfd','VFD']].map(([v,t])=>`<button data-value="${v}" class="${state.ahuType===v?'active':''}">${t}</button>`).join('')}</div>`;}
@@ -19,7 +19,7 @@ function ahuPeriodSeg(){return `<div class="seg" data-control="ahuPeriod">${[['y
 function unitSeries(base,actual,n=16){const shape=[.91,.95,1.00,.96,.93,1.04,1.06,1.02,.98,.96,1.03,1.01,.97,.94,1.00,.96];return {baseline:shape.slice(0,n).map((m,i)=>Math.round(base*m*(1+(i%4-1.5)*.008))),actual:shape.slice(0,n).map((m,i)=>Math.round(actual*m*(1+(i%3-1)*.007)))};}
 function shadowSeries(u,n=16){const s=unitSeries(u.baseline,u.actual,n);return {...s,recommended:s.actual.map((v,i)=>Math.round(v*(1-u.shadow/100)*(1+(i%5-2)*.004)))};}
 function ahuSavingsBar(){return `<div class="chart-box ahu-chart-md">${svgBars([{name:'改善前',data:[62400,98200],color:'#a8b9c9'},{name:'改善後',data:[47800,74600],color:'#1597f5'}],['EC FAN (12台)','VFD (17台)'],{max:120000})}</div><div class="ahu-statusbar"><span class="pill-chip good">EC FAN ▼23%</span><span class="pill-chip good">VFD ▼24%</span><span class="card-sub">相似負載與營業條件標準化後比較</span></div>`;}
-function ahuDonutBlock(){return `<div class="ahu-donut-wrap"><div class="ahu-donut"><div class="ahu-donut-center">1,280,500<small>kWh<br>2026 累計節電</small></div></div><div class="ahu-legend"><span><i style="background:var(--blue)"></i>VFD 改善　52%</span><span><i style="background:var(--green)"></i>EC FAN 改善　32%</span><span><i style="background:var(--purple)"></i>AI 建議採納後　11%</span><span><i style="background:var(--amber)"></i>其他運轉調整　5%</span></div></div>`;}
+function ahuDonutBlock(){return `<div class="ahu-donut-wrap"><div class="ahu-donut"><div class="ahu-donut-center"><b>1,280,500</b><small>kWh<br>2026 累計節電</small></div></div><div class="ahu-legend"><span><i style="background:var(--blue)"></i>VFD 改善　52%</span><span><i style="background:var(--green)"></i>EC FAN 改善　32%</span><span><i style="background:var(--purple)"></i>AI 建議採納後　11%</span><span><i style="background:var(--amber)"></i>其他運轉調整　5%</span></div></div>`;}
 
 function renderAhuOverview(){
   const months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];

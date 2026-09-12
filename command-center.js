@@ -47,8 +47,8 @@
           <div class="cc-kpi-foot"><span>系統運轉率</span><b>78%</b></div>
         </article>
         <article class="cc-efficiency">
-          <div class="cc-gauge"><div class="cc-gauge-core"><span>系統能效</span><strong>0.68</strong><small>kW/RT</small></div></div>
-          <div class="cc-benchmark">${ccIcon('leaf')} 優於展示基準 12%</div>
+          <div class="cc-gauge"><div class="cc-gauge-core"><span>冷源主機效率</span><strong>0.68</strong><small>kW/RT</small></div></div>
+          <div class="cc-benchmark">${ccIcon('leaf')} 優於基準 12%</div>
         </article>
         <article class="cc-kpi cc-kpi-green">
           <div class="cc-kpi-label">${ccIcon('leaf')}<span>今日節電量</span></div>
@@ -119,7 +119,7 @@
           </div>
         </article>
       </section>
-      <div class="cc-demo-note">Demo Data｜本頁數值為 EMS + AI 未來介面情境展示；正式系統應以現場 BMS／EMS、設備量測與 M&amp;V 驗證資料為準。</div>
+      <div class="cc-demo-note">資料來源｜BMS／EMS、設備量測與 M&amp;V 驗證資料　｜　AI 建議目前採 Advisory Mode。</div>
     </div>`;
   }
 

@@ -71,17 +71,17 @@
 
   function renderPlantV4(){
     const chillers=[
-      ['CH-01','待機',0,'0.00','standby'],['CH-02','待機',0,'0.00','standby'],['CH-03','運轉中',85,'0.66','on'],['CH-04','停機',0,'—','fault'],['CH-05','運轉中',78,'0.70','on'],['CH-06','運轉中',76,'0.69','on']
+      ['CH-01','待機',0,'—','standby'],['CH-02','待機',0,'—','standby'],['CH-03','運轉中',85,'0.66','on'],['CH-04','停機',0,'—','fault'],['CH-05','運轉中',78,'0.70','on'],['CH-06','運轉中',76,'0.69','on']
     ];
     return `<div class="ca-page v4-cockpit">
       <section class="ca-hero"><div><span>BIG CITY × DELTA ENERGY</span><h1>冰水機房智慧駕駛艙</h1><p>Chiller Plant Smart Cockpit｜即時監測主機、泵浦、水側效率與 AI 最佳化建議</p></div><div class="ca-mode-note">深／淺模式同步切換</div></section>
-      <div class="ca-kpis">${kpi('◔','系統效率','0.68 kW/RT','優於展示基準 12%','good')}${kpi('❄','即時冷量','3,080 RT','較昨日同期 +5.2%')}${kpi('ϟ','主機總功率','2,094 kW','較昨日同期 -6.8%','good')}${kpi('♨','系統 ΔT','5.1°C','目標 5.0°C','good')}${kpi('◉','二次泵頻率','43 Hz','最佳區間 40–50 Hz','good')}${kpi('AI','AI 今日建議','4 項','預估節能 6–8%','warn')}</div>
+      <div class="ca-kpis">${kpi('◔','冷源主機效率','0.68 kW/RT','優於基準 12%','good')}${kpi('❄','即時冷量','3,080 RT','較昨日同期 +5.2%')}${kpi('ϟ','主機總功率','2,094 kW','較昨日同期 -6.8%','good')}${kpi('♨','系統 ΔT','5.1°C','目標 5.0°C','good')}${kpi('◉','二次泵頻率','43 Hz','最佳區間 40–50 Hz','good')}${kpi('AI','AI 今日建議','4 項','預估節能 6–8%','warn')}</div>
 
       <div class="v4-top-grid">
         <section class="v4-card v4-eff-card">
-          <div class="v4-card-title">${titleIcon('bars')}<strong>整體機房效率</strong><small>System Efficiency</small></div>
+          <div class="v4-card-title">${titleIcon('bars')}<strong>冷源主機效率</strong><small>Chiller Plant Efficiency</small></div>
           <div class="v4-eff-body">
-            <div class="v4-gauge"><div class="v4-gauge-center"><span>整體效率</span><b>0.68</b><em>kW/RT</em></div></div>
+            <div class="v4-gauge"><div class="v4-gauge-center"><span>冷源主機效率</span><b>0.68</b><em>kW/RT</em></div></div>
             <div class="v4-metrics">
               <div>${metricIcon('snow')}<span>CHWS</span><b>7.0°C</b></div>
               <div>${metricIcon('snow')}<span>CHWR</span><b>12.1°C</b></div>
@@ -116,8 +116,8 @@
         </section>
       </div>
 
-      <div class="ca-grid plant-bottom"><section class="ca-card"><div class="ca-card-title">AI 診斷與優化建議</div><div class="recommend-list">${[['低 ΔT 風險','目前 ΔT 5.1°C，已接近目標下限。','人工試降二次側 DP 5 kPa，觀察 15 分鐘。','6–8%'],['二次側過度送水','二次泵長時間高頻，部分時段負載偏低。','建議人工試降頻率並監看最不利端。','3–5%'],['部分 AHU 閥位偏低','3F 區域部分閥位低於 20%。','檢查盤管控制與末端需求。','2–4%'],['冷卻水塔效率可優化','CWR 32.4°C，仍有優化空間。','調整風扇台數與轉速策略。','3–6%']].map((r,i)=>`<div class="rec"><span>${i+1}</span><b>${r[0]}</b><p>${r[1]}</p><em>${r[2]}</em><strong>${r[3]}</strong></div>`).join('')}</div></section><section class="ca-card"><div class="ca-card-title">即時警示／關注事項</div><div class="alert-list"><div class="alert fault">● CH-04 主機故障停機 <b>待處理</b></div><div class="alert warn">▲ 2F 回水溫度偏高 <b>監測中</b></div><div class="alert warn">▲ CT-03 出水溫度偏高 <b>監測中</b></div><div class="alert good">● P-02 頻率波動已改善 <b>已改善</b></div></div></section></div>
-      <div class="ca-note">Demo Data｜本頁為展示資料，不代表實際運轉數據。</div>
+      <div class="ca-grid plant-bottom"><section class="ca-card"><div class="ca-card-title">AI 診斷與優化建議</div><div class="recommend-list">${[['3F 局部低 ΔT','3F–5F 區域 ΔT 3.2°C，局部輸送效率偏低。','先確認最不利端，再人工試降二次側 DP 5 kPa。','6–8%'],['二次側過度送水','二次泵長時間高頻，部分時段負載偏低。','建議人工試降頻率並監看最不利端。','3–5%'],['部分 AHU 閥位偏低','3F 區域部分閥位低於 20%。','檢查盤管控制與末端需求。','2–4%'],['冷卻水塔效率可優化','CWR 32.4°C，仍有優化空間。','調整風扇台數與轉速策略。','3–6%']].map((r,i)=>`<div class="rec"><span>${i+1}</span><b>${r[0]}</b><p>${r[1]}</p><em>${r[2]}</em><strong>${r[3]}</strong></div>`).join('')}</div></section><section class="ca-card"><div class="ca-card-title">即時警示／關注事項</div><div class="alert-list"><div class="alert fault">● CH-04 主機故障停機 <b>待處理</b></div><div class="alert warn">▲ 2F 回水溫度偏高 <b>監測中</b></div><div class="alert warn">▲ CT-03 出水溫度偏高 <b>監測中</b></div><div class="alert good">● P-02 頻率波動已改善 <b>已改善</b></div></div></section></div>
+      <div class="ca-note">控制狀態｜Advisory Mode，不直接下控設備；效益依現場量測與 M&amp;V 驗證結果更新。</div>
     </div>`;
   }
 

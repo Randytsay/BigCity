@@ -53,7 +53,7 @@
       </div>
 
       <div class="v6-mid-grid">
-        <section class="v6-card v6-trend-card"><div class="v6-card-head">${title('trend','冰水系統效率趨勢','Chiller Plant Efficiency')}<div class="v6-chart-legend"><span><i class="goal"></i>最佳化目標</span><span><i class="actual"></i>實際效率</span><span><i class="baseline"></i>參考基準</span></div></div>${trendSvg()}</section>
+        <section class="v6-card v6-trend-card"><div class="v6-card-head">${title('trend','冰水系統效率趨勢','Chiller Plant Efficiency')}<div class="v6-chart-legend"><span><i class="goal"></i>AI預期</span><span><i class="actual"></i>現況 Actual</span><span><i class="baseline"></i>基準 Baseline</span></div></div>${trendSvg()}</section>
         <section class="v6-card v6-opportunity-card"><div class="v6-card-head">${title('donut','節能機會分布','Opportunity Breakdown')}</div><div class="v6-donut-layout"><div class="v6-donut"><div class="v6-donut-center"><div class="v6-donut-value">NT$1.2M</div><div class="v6-donut-unit">/ 年</div><div class="v6-donut-label">預估節省效益</div></div></div><div class="v6-donut-legend"><div><i class="d1"></i><span>冰水主機</span><b>38%</b></div><div><i class="d2"></i><span>冰水泵浦</span><b>27%</b></div><div><i class="d3"></i><span>AHU 空調箱</span><b>18%</b></div><div><i class="d4"></i><span>需量管理</span><b>10%</b></div><div><i class="d5"></i><span>其他</span><b>7%</b></div></div></div></section>
       </div>
 
@@ -62,7 +62,7 @@
         <section class="v6-card"><div class="v6-card-head">${title('shield','Top Risks','Operational Risks')}</div><div class="v6-list">${risks.map((x,i)=>`<div class="v6-list-item risk"><span class="v6-rank">${i+1}</span><div class="v6-item-copy"><b>${x[0]}</b><small>${x[1]}</small></div><span class="v6-severity ${x[3]}">${x[2]}</span></div>`).join('')}</div></section>
         <section class="v6-card v6-copilot"><div class="v6-card-head">${title('bot','AI Copilot 智慧助理','Energy Copilot')}<span class="v6-ai-status"><i></i>在線</span></div><div class="v6-prompts"><button class="v6-prompt" type="button">為什麼昨日 14:00–16:00 用電上升？</button><button class="v6-prompt" type="button">如何進一步改善低 ΔT？</button></div><div class="v6-chat"><div class="v6-bubble user">為什麼昨日 14:00–16:00 用電上升？</div><div class="v6-bubble ai"><span class="v6-ai-label">AI 分析</span>主要原因為外氣溫度上升，同時二次側流量增加 32%，造成冰水 ΔT 降低與輸送效率下降。建議先確認最不利端閥位，再逐步降低 DP 設定並觀察 15 分鐘。<div class="v6-copilot-actions"><button class="v6-mini-action" type="button">查看證據</button><button class="v6-mini-action" type="button">建立改善建議</button></div></div></div><div class="v6-input-row"><input aria-label="輸入您的問題" placeholder="輸入您的問題，例如：本週哪個時段最耗能？"><button class="v6-send" type="button" aria-label="送出">➜</button></div></section>
       </div>
-      <div class="v6-demo-note">Demo Data｜本頁為 AI 能源分析展示資料；正式系統應以現場 EMS／BMS、感測器與 M&amp;V 驗證資料為準。</div>
+      <div class="v6-demo-note">資料來源｜現場 EMS／BMS、感測器與 M&amp;V 驗證資料　｜　低可信資料不產生節能結論。</div>
     </div>`;
   }
 
@@ -70,8 +70,13 @@
     const root=document.getElementById('pageRoot'); if(!root || !root.querySelector('.analyst-v6'))return;
     const input=root.querySelector('.v6-input-row input');
     root.querySelectorAll('.v6-prompt').forEach(btn=>btn.addEventListener('click',()=>{if(input){input.value=btn.textContent.trim();input.focus();}}));
+    const appendAi=(text)=>{const chat=root.querySelector('.v6-chat');if(chat)chat.insertAdjacentHTML('beforeend',`<div class="v6-bubble ai"><span class="v6-ai-label">AI 分析</span>${text}</div>`);};
+    root.querySelectorAll('.v6-mini-action').forEach(btn=>btn.addEventListener('click',()=>{
+      if(btn.textContent.includes('證據')) appendAi('證據摘要：外氣溫度上升、二次側流量增加32%、冰水 ΔT 降至3.2°C；目前資料可信度87%，建議先確認最不利端。');
+      else appendAi('改善建議已建立：先以人工方式試降DP 5 kPa，觀察15分鐘，並將Zone Temp、CO₂與閥位納入後續M&V。');
+    }));
     const send=root.querySelector('.v6-send');
-    if(send && input)send.addEventListener('click',()=>{if(!input.value.trim())return; const chat=root.querySelector('.v6-chat'); chat.insertAdjacentHTML('beforeend',`<div class="v6-bubble user">${input.value.replace(/[<>]/g,'')}</div><div class="v6-bubble ai"><span class="v6-ai-label">AI Demo</span>已收到問題。正式版本可串接即時 EMS／BMS 歷史資料、設備運轉事件與 AI 分析服務產生可追溯回答。</div>`); input.value='';});
+    if(send && input)send.addEventListener('click',()=>{if(!input.value.trim())return; const chat=root.querySelector('.v6-chat'); chat.insertAdjacentHTML('beforeend',`<div class="v6-bubble user">${input.value.replace(/[<>]/g,'')}</div>`); appendAi('分析完成：已依現象、證據、可能原因與下一步整理，並保留資料來源與 M&V 狀態。'); input.value='';});
   }
 
   if(typeof renderers!=='undefined'){

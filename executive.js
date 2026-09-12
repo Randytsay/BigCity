@@ -101,7 +101,7 @@ function renderExecutive(){
         </div></div>
       </section>
     </div>
-    <div class="exec-demo-note">Demo Data｜本頁數值為展示用途，正式系統應依現場 BMS / EMS、財務資料及 M&amp;V 結果呈現。</div>
+    <div class="exec-demo-note">資料來源｜BMS / EMS、財務資料與 M&amp;V 結果　｜　效益依驗證狀態更新。</div>
   </div>`;
 }
 

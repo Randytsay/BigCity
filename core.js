@@ -1,13 +1,15 @@
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let savedTheme='light'; try{savedTheme=localStorage.getItem('bigcity-theme')||'light'}catch(e){}
 const state={
-  page:'home', theme:savedTheme,
+  // Customer demos open on the executive conclusion. Operators can still
+  // move into the command center from the same navigation.
+  page:'executive', theme:savedTheme,
   site:'all', period:'year', compare:'yoy', chart:'line', insight:0,
   feedback:{}, plantSelected:'CH-02'
 };
 
 const siteData={
-  all:{name:'全部場域',rth:1285320,kwh:4320550,plant:.86,saving:288430,cost:1009505,co2:142375},
+  all:{name:'全部場域',rth:1285320,kwh:4320550,plant:.82,saving:288430,cost:1009505,co2:142375},
   main:{name:'巨城本館',rth:642380,kwh:2248550,plant:.82,saving:166420,cost:582470,co2:82150},
   creative:{name:'創藝大樓',rth:321420,kwh:1120480,plant:.85,saving:71420,cost:249970,co2:35190},
   cinema:{name:'威秀影城',rth:321520,kwh:951520,plant:.96,saving:50590,cost:177065,co2:25035}
@@ -123,7 +125,7 @@ function renderHome(){
       <tr><td>2026-09-08 16:40</td><td>末端閥位異常</td><td>3F 多台 AHU 閥位偏低，建議檢查平衡</td><td>${pill('已處理','good')}</td></tr>
     </tbody></table></div>`)}
   </div>
-  <div class="demo-note">DEMO 模擬數據｜正式系統將由 iFIX / WebCTRL / 電錶與現場感測資料驅動；AI 為建議模式，不直接下控設備。</div>`;
+  <div class="demo-note">資料連線｜iFIX / WebCTRL / 電錶 / 現場感測　｜　控制狀態｜AI Advisory Mode，不直接下控設備。</div>`;
 }
 
 const insightEvents=[
